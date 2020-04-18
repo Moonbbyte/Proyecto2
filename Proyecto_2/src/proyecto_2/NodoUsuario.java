@@ -9,13 +9,6 @@ package proyecto_2;
  *
  * @author brand
  */
-public class Proyecto_2 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        System.out.println("Lol");
-    }
+public class NodoUsuario {
     
 }
