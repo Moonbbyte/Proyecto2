@@ -1,14 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyecto_2;
 
-/**
- *
- * @author brand
- */
+
 public class NodoUsuario {
+    private Object valor;
+    private NodoUsuario siguiente;
+
+    public NodoUsuario(Object valor){
+    this.valor=valor;
+    siguiente=null;
+    
+    }
+    
+ 
+    public Object getValor() {
+        return valor;
+    }
+
+    
+    public void setValor(Object valor) {
+        this.valor = valor;
+    }
+
+    
+    public NodoUsuario getSiguiente() {
+        return siguiente;
+    }
+
+    
+    public void setSiguiente(NodoUsuario siguiente) {
+        this.siguiente = siguiente;
+    }
+    
+    
+    
     
 }
