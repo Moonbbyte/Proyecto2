@@ -18,7 +18,13 @@ public class Proyecto_2 {
      l.add(5);
      l.imprimir();
         System.out.println("\n"+l.peek());
-        System.out.println(l.find(23));
+        System.out.println(l.find(5));
+        System.out.println(l.getNext());
+        l.delete(1);
+        System.out.println("\n\n\n");
+        
+        l.imprimir();
+        System.out.println(l.getSize());
              
         
     }

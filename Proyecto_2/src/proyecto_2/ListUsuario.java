@@ -40,20 +40,22 @@ private int size;
        for(int i=0; i<size-1;i++){
        temp=temp.getSiguiente();
        contador++;
-       if(temp.getValor().equals(e)){
+       if(cabeza.getValor().equals(e)){
+       contador=0;
+       break;}
+       else if(temp.getValor().equals(e)){
        break;
        }
-       
-       
        }
        
 
-        return contador+1;
+        return contador;
     }
 
     @Override
     public Object getNext() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Object temp=cabeza.getSiguiente().getValor();
+       return temp;
     }
 
     @Override
@@ -74,12 +76,25 @@ private int size;
 
     @Override
     public Object pop() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Object r="Borrado el primer dato con exito";
+        cabeza=cabeza.getSiguiente();
+        size--;
+        return r;
     }
 
     @Override
     public void delete(Object e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        NodoUsuario temp=cabeza;
+        int contador=0;
+        if((int)e==0){
+        cabeza=cabeza.getSiguiente();
+        }else{
+        while(contador<((int)e-1)){
+        temp=temp.getSiguiente();
+        contador++;
+        }}
+       temp.setSiguiente(temp.getSiguiente().getSiguiente());
+       size--;
     }
 
    
