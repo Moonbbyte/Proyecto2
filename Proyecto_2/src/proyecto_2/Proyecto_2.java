@@ -10,12 +10,17 @@ package proyecto_2;
  * @author brand
  */
 public class Proyecto_2 {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        System.out.println("Lol");
+       ListUsuario l= new ListUsuario();
+     l.add(12);
+     l.add(23);
+     l.add("Sofia");
+     l.add(5);
+     l.imprimir();
+        System.out.println("\n"+l.peek());
+        System.out.println(l.find(23));
+             
+        
     }
     
 }
