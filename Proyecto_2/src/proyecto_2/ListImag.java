@@ -1,6 +1,6 @@
 package proyecto_2;
 
-public class ListImag extends EstructuraDeDatos {
+public class ListImag extends EstructuraDeDatos implements java.io.Serializable{
 
     private NodoDoble primero, ultimo;
     private int size = 0;
@@ -43,6 +43,7 @@ public class ListImag extends EstructuraDeDatos {
             } else {
                 actual.getSiguiente();
                 contador++;
+                
             }
         }
         return contador;
