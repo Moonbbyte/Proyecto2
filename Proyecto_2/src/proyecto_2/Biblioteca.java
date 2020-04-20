@@ -1,11 +1,17 @@
 package proyecto_2;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 
 public class Biblioteca extends javax.swing.JFrame {
 
     private static String usuario1;
     ListaDCircular lc = new ListaDCircular();
+    ListImag li= new ListImag();
+     static int n=0;
 
     public Biblioteca() {
         initComponents();
@@ -76,6 +82,11 @@ public class Biblioteca extends javax.swing.JFrame {
         Imagen.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton5.setText("Agregar Imagen");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         cat2.setBackground(new java.awt.Color(255, 255, 255));
         cat2.setForeground(new java.awt.Color(0, 0, 0));
@@ -88,6 +99,11 @@ public class Biblioteca extends javax.swing.JFrame {
         jLabel3.setOpaque(true);
 
         jButton6.setText("Eliminar Imagen");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Eliminar este usuario");
 
@@ -225,13 +241,23 @@ public class Biblioteca extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/////////////////atras
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+     
+        if(n<0){
+        JOptionPane.showMessageDialog(null, "Ya llego a la primera imagen");
+        n=1;
+        }else{
+        this.areaImagen.setIcon((ImageIcon)li.get(n--));}
     }//GEN-LAST:event_jButton1ActionPerformed
-
+////////////////////adelante
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+       try{ 
+        
+        this.areaImagen.setIcon((ImageIcon)li.get(n++));   }catch(Exception e){
+        JOptionPane.showMessageDialog(null, "Ya llego a la ultima imagen");
+        n=li.getSize()-2;
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -255,7 +281,7 @@ public class Biblioteca extends javax.swing.JFrame {
       
       
     }//GEN-LAST:event_jButton8ActionPerformed
-
+/////////////////ELIMINAR CATEGORIA
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
       
       Object t = lc.find( cat.getText());
@@ -273,6 +299,23 @@ public class Biblioteca extends javax.swing.JFrame {
       
         
     }//GEN-LAST:event_jButton9ActionPerformed
+/////////////////////////CARGAR IMAGEN
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       BufferedImage img=null;
+       String t=Imagen.getText();
+       try{img=ImageIO.read(new File("C:\\Users\\brand\\OneDrive\\Documentos\\NetBeansProjects\\Proyect 2\\Proyecto2\\Imagenes\\"+t+".jpg"));
+       }catch(Exception e){
+       JOptionPane.showMessageDialog(null, "xD");
+       }
+       
+       ImageIcon n= new ImageIcon(img);
+       li.add(n);
+       this.areaImagen.setIcon((ImageIcon)li.get(0));    
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        System.out.println(li.get(0).toString());
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     public void Cargarlista() {
 
