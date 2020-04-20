@@ -89,7 +89,6 @@ public class ListImag extends EstructuraDeDatos {
         actual = primero;
         atras= null;
         while (actual != null) {
-            System.out.println("xD");
            
             if (actual.getValor().equals(e)) {
                
@@ -105,6 +104,7 @@ public class ListImag extends EstructuraDeDatos {
             atras=actual;
             actual = actual.getSiguiente();
         }
+        size--;
 
     }
 
