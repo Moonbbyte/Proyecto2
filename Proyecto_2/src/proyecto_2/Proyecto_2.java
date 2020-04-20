@@ -9,7 +9,13 @@ public class Proyecto_2 {
     li.add(34);
     li.add(90);
     li.add(70);
+    li.add(35);
    li.imprimir();
+        System.out.println("");
+        li.delete(34);
+        
+        
+        li.imprimir();
     
     
              
