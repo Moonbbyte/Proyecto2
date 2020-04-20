@@ -48,7 +48,29 @@ public class ListImag extends EstructuraDeDatos implements java.io.Serializable{
         }
         return contador;
     }
+public Object find2(Object e) {
+        NodoDoble actual = primero;
+        int contador = 0;
+        actual = primero;
+        Object t;
+         if (primero == null) {
+                contador = 60;
 
+            } else {
+        for (int i = 0; i < size - 1; i++) {
+
+           if (primero.getValor().equals(e)) {
+                contador = 0;
+                break;
+            } else if (primero.getValor().equals(e)) {
+                break;    
+            }
+             contador++;
+            primero =primero.getSiguiente();
+        }}
+
+        return contador;
+    }
     @Override
     public Object getNext() {
         NodoDoble actual = new NodoDoble();
@@ -77,7 +99,7 @@ public class ListImag extends EstructuraDeDatos implements java.io.Serializable{
     public Object pop() {
         Object r = "Borrado el primer dato con exito";
         primero=primero.getSiguiente();
-        primero.setAnterior(null);
+        primero.getSiguiente().setAnterior(null);
         
         size--;
         return r;
@@ -96,7 +118,9 @@ public class ListImag extends EstructuraDeDatos implements java.io.Serializable{
                 if (actual.equals(primero)) {
                    primero= primero.getSiguiente();
                    primero.setAnterior(null);
-                } else {
+                } 
+                else {
+                    
                     atras.setSiguiente(actual.getSiguiente());
                     actual.getSiguiente().setAnterior(actual.getAnterior());
                 }
@@ -108,6 +132,40 @@ public class ListImag extends EstructuraDeDatos implements java.io.Serializable{
         size--;
 
     }
+    
+    public void delete2(Object e) {
+        NodoDoble actual = new NodoDoble();
+        NodoDoble atras = new NodoDoble();
+        int contador=0;
+        
+        actual = primero;
+        atras= null;
+        
+        if((int)e==0){
+        primero= primero.getSiguiente();
+         primero.getSiguiente().setAnterior(null);
+        }else if((int)e==size-1){
+        ultimo=ultimo.getAnterior();
+        ultimo.setSiguiente(null);
+        
+        } else{
+            
+        while(contador<((int)e)){
+        atras=actual;
+        actual = actual.getSiguiente();    
+         contador++;
+        }
+       
+        atras.setSiguiente(actual.getSiguiente());
+        actual.getSiguiente().setAnterior(actual.getAnterior());
+        }
+         size--;
+
+    }
+    
+    
+    
+    
 
     public void ImprimirReversa() {
         NodoDoble actual = new NodoDoble();
@@ -127,6 +185,13 @@ public class ListImag extends EstructuraDeDatos implements java.io.Serializable{
             actual = actual.getSiguiente();
         }
 
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
 
 }

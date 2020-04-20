@@ -87,17 +87,8 @@ public class ListUsuario extends EstructuraDeDatos implements java.io.Serializab
 
     @Override
     public void delete(Object e) {
-        NodoUsuario temp = cabeza;
-        int contador = 0;
-        if ((int) e == 0) {
-            cabeza = cabeza.getSiguiente();
-        } else {
-            while (contador < ((int) e - 1)) {
-                temp = temp.getSiguiente();
-                contador++;
-            }
-        }
-        temp.setSiguiente(temp.getSiguiente().getSiguiente());
+        NodoUsuario actual=new NodoUsuario();
+        
         size--;
     }
 

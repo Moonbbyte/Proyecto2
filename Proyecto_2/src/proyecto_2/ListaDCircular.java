@@ -60,6 +60,7 @@ public class ListaDCircular extends EstructuraDeDatos implements java.io.Seriali
 
         return contador;
     }
+    
 
     @Override
     public Object getNext() {

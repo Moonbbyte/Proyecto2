@@ -11,7 +11,7 @@ public class NodoUsuario {
     siguiente=null;
     
     }
-    
+    public NodoUsuario(){}
  
     public Object getValor() {
         return valor;
