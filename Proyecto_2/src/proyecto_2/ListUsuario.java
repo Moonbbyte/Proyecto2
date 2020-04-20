@@ -1,6 +1,9 @@
 package proyecto_2;
 
-public class ListUsuario extends EstructuraDeDatos implements java.io.Serializable {
+import java.io.Serializable;
+
+public class ListUsuario extends EstructuraDeDatos implements Serializable{
+     private static final long serialVersionUID=1L;
 
     private NodoUsuario cabeza;
     private int size;
@@ -88,7 +91,20 @@ public class ListUsuario extends EstructuraDeDatos implements java.io.Serializab
     @Override
     public void delete(Object e) {
         NodoUsuario actual=new NodoUsuario();
-        
+         NodoUsuario anterior=new NodoUsuario();
+        actual=cabeza;
+        while(actual!=null){
+          if(actual.getValor().equals(e)){
+                if(actual.equals(cabeza)){
+                cabeza=cabeza.getSiguiente();
+                }else{
+                anterior.setSiguiente(actual.getSiguiente());
+                }  
+          }
+        anterior=actual;
+       actual=actual.getSiguiente();
+        }
+       
         size--;
     }
 

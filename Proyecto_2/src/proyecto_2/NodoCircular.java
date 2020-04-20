@@ -1,8 +1,12 @@
 
 package proyecto_2;
 
+import java.io.Serializable;
 
-public class NodoCircular {
+
+public class NodoCircular implements Serializable {
+    
+    private static final long serialVersionUID=1L;
     private Object valor;
     private NodoCircular siguiente,anterior;
 

@@ -2,21 +2,26 @@ package proyecto_2;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.Serializable;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
-public class Biblioteca extends javax.swing.JFrame {
-
+public class Biblioteca extends javax.swing.JFrame implements Serializable {
+     private static final long serialVersionUID=1L;
+    BitManager bit= new BitManager();
     private static String usuario1;
     ListaDCircular lc = new ListaDCircular();
     ListImag fimag = new ListImag();
     ListImag li = new ListImag();
+    ListUsuario lu= new ListUsuario();
     static int n = 0;
-
+  
     public Biblioteca() {
+    
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
     public static String getUsuario1() {
@@ -76,8 +81,18 @@ public class Biblioteca extends javax.swing.JFrame {
         });
 
         jButton3.setText("Cargar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Guardar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         Imagen.setBackground(new java.awt.Color(255, 255, 255));
         Imagen.setForeground(new java.awt.Color(0, 0, 0));
@@ -107,6 +122,11 @@ public class Biblioteca extends javax.swing.JFrame {
         });
 
         jButton7.setText("Eliminar este usuario");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         cat.setBackground(new java.awt.Color(255, 255, 255));
         cat.setForeground(new java.awt.Color(0, 0, 0));
@@ -265,7 +285,7 @@ public class Biblioteca extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         usuario.setText(Biblioteca.getUsuario1());
-
+        lu.imprimir();
     }//GEN-LAST:event_jButton10ActionPerformed
 ///////////////////////////CREAR LISTA
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -283,8 +303,25 @@ public class Biblioteca extends javax.swing.JFrame {
             cat2.addItem(lc.get(i));
         }
 
-
     }//GEN-LAST:event_jButton8ActionPerformed
+public void usuariob(String usuario){
+    Object numero=lu.find(usuario);
+    String nombre=usuario;
+    if((int)numero==50){
+    Biblioteca.setUsuario1(nombre);
+    }else {
+    lu.add(usuario);
+    Biblioteca.setUsuario1(nombre);
+      
+    }
+
+
+}
+
+
+
+
+
 /////////////////ELIMINAR CATEGORIA
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
 
@@ -336,6 +373,28 @@ public class Biblioteca extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton6ActionPerformed
+///////////////////////////ELIMINAR USUARIO
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+       lu.delete(usuario.getText());
+       usuario.setText(lu.get(0).toString());
+       Biblioteca.setUsuario1(lu.get(0).toString());
+    }//GEN-LAST:event_jButton7ActionPerformed
+////////////////GUARDAR EN MEMORIA
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        bit.writeObject(lc);
+        bit.writeObject(fimag);
+        bit.writeObject(li);
+        bit.writeObject(lu);
+    }//GEN-LAST:event_jButton4ActionPerformed
+////////LEER LA MEMORIA
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       
+        ListaDCircular readed=(ListaDCircular)bit.readObject();
+        
+      
+        
+       
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public void Cargarlista() {
 

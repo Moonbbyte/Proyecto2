@@ -1,8 +1,11 @@
 
 package proyecto_2;
 
+import java.io.Serializable;
 
-public class NodoUsuario {
+
+public class NodoUsuario implements Serializable{
+     private static final long serialVersionUID=1L;
     private Object valor;
     private NodoUsuario siguiente;
 
@@ -11,7 +14,10 @@ public class NodoUsuario {
     siguiente=null;
     
     }
-    public NodoUsuario(){}
+    public NodoUsuario(){
+    
+    
+    }
  
     public Object getValor() {
         return valor;

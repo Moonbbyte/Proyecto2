@@ -1,7 +1,9 @@
 package proyecto_2;
 
-public class ListaDCircular extends EstructuraDeDatos implements java.io.Serializable {
+import java.io.Serializable;
 
+public class ListaDCircular extends EstructuraDeDatos implements Serializable {
+ private static final long serialVersionUID=1L;
     private NodoCircular primero, ultimo;
     private int size;
 

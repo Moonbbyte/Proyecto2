@@ -131,19 +131,13 @@ Biblioteca b=new Biblioteca();
     }//GEN-LAST:event_usuarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    Object numero=lu.find(usuario.getText());
-    String nombre=usuario.getText();
-    if((int)numero==50){
-    Biblioteca.setUsuario1(nombre);
+    
     b.setTitle("Biblioteca");
+    b.usuariob(usuario.getText());
     b.setVisible(true);
+    
    
-    }else {
-    lu.add(usuario.getText());
-    Biblioteca.setUsuario1(nombre);
-    b.setTitle("Biblioteca");
-    b.setVisible(true);  
-    }
+    
        
       
     }//GEN-LAST:event_jButton1ActionPerformed

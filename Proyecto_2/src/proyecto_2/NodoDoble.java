@@ -1,8 +1,11 @@
 
 package proyecto_2;
 
+import java.io.Serializable;
 
-public class NodoDoble {
+
+public class NodoDoble implements Serializable{
+     private static final long serialVersionUID=1L;
 private NodoDoble siguiente,anterior;
  private Object valor;
  
