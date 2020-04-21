@@ -3,7 +3,8 @@ package proyecto_2;
 import java.io.Serializable;
 
 public class ListaDCircular extends EstructuraDeDatos implements Serializable {
- private static final long serialVersionUID=1L;
+
+    private static final long serialVersionUID = 1L;
     private NodoCircular primero, ultimo;
     private int size;
 
@@ -43,26 +44,26 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
         int contador = 0;
         actual = primero;
         Object t;
-         if (primero == null) {
-                contador = 60;
+        if (primero == null) {
+            contador = 60;
 
-            } else {
-        for (int i = 0; i < size - 1; i++) {
+        } else {
+            for (int i = 0; i < size - 1; i++) {
 
-           if (primero.getValor().equals(e)) {
-                contador = 50;
-                break;
-            } else if (primero.getValor().equals(e)) {
-                contador = 50;
+                if (primero.getValor().equals(e)) {
+                    contador = 50;
+                    break;
+                } else if (primero.getValor().equals(e)) {
+                    contador = 50;
 
-                break;
+                    break;
+                }
+                primero = primero.getSiguiente();
             }
-            primero =primero.getSiguiente();
-        }}
+        }
 
         return contador;
     }
-    
 
     @Override
     public Object getNext() {
@@ -121,13 +122,13 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
                     actual.getSiguiente().setAnterior(anterior);
 
                 }
-               
+
             }
 
             anterior = actual;
             actual = actual.getSiguiente();
         } while (actual != primero);
-            size--;
+        size--;
     }
 
     public void imprimir() {
@@ -139,6 +140,13 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
 
         } while (nv != primero);
 
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
 
 }

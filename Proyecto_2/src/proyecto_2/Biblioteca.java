@@ -8,20 +8,25 @@ import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
 public class Biblioteca extends javax.swing.JFrame implements Serializable {
-     private static final long serialVersionUID=1L;
-    BitManager bit= new BitManager();
+
+    private static final long serialVersionUID = 1L;
+    BitManager bit = new BitManager();
+    BitManager1 bit1 = new BitManager1();
+    BitManager2 bit2 = new BitManager2();
+    BitManager3 bit3 = new BitManager3();
+
     private static String usuario1;
     ListaDCircular lc = new ListaDCircular();
-    ListImag fimag = new ListImag();
+    auxlistimag fimag = new auxlistimag();
     ListImag li = new ListImag();
-    ListUsuario lu= new ListUsuario();
+    ListUsuario lu = new ListUsuario();
     static int n = 0;
-  
+
     public Biblioteca() {
-    
+
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
     }
 
     public static String getUsuario1() {
@@ -53,8 +58,12 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        categoria = new javax.swing.JTree();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
         usuario.setBackground(new java.awt.Color(255, 255, 255));
         usuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -152,6 +161,8 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
             }
         });
 
+        jScrollPane1.setViewportView(categoria);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -172,10 +183,13 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton7)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton7))
                                             .addComponent(cat2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 72, Short.MAX_VALUE))
+                                        .addGap(0, 2, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(jButton1)))
@@ -226,12 +240,6 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(cat2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(272, 272, 272)
-                        .addComponent(jButton7))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(areaImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -243,8 +251,18 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton4)
-                            .addComponent(jButton3))))
-                .addGap(27, 27, 27))
+                            .addComponent(jButton3)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(cat2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(272, 272, 272)
+                                .addComponent(jButton7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -304,23 +322,18 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
         }
 
     }//GEN-LAST:event_jButton8ActionPerformed
-public void usuariob(String usuario){
-    Object numero=lu.find(usuario);
-    String nombre=usuario;
-    if((int)numero==50){
-    Biblioteca.setUsuario1(nombre);
-    }else {
-    lu.add(usuario);
-    Biblioteca.setUsuario1(nombre);
-      
+    public void usuariob(String usuario) {
+        Object numero = lu.find(usuario);
+        String nombre = usuario;
+        if ((int) numero == 50) {
+            Biblioteca.setUsuario1(nombre);
+        } else {
+            lu.add(usuario);
+            Biblioteca.setUsuario1(nombre);
+
+        }
+
     }
-
-
-}
-
-
-
-
 
 /////////////////ELIMINAR CATEGORIA
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -358,42 +371,66 @@ public void usuariob(String usuario){
     }//GEN-LAST:event_jButton5ActionPerformed
 //////////////////////ELIMINAR IMAGENES
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       fimag.Imprimir();
+        fimag.Imprimir();
         Object t = Imagen.getText();
         Object index = fimag.find2(t);
         System.out.println(index);
         if ((int) index == 60) {
             JOptionPane.showMessageDialog(null, "No se han agregado imagenes");
-        }else {
-                System.out.println(li.getSize());
+        } else {
+            System.out.println(li.getSize());
             li.delete2(index);
             fimag.setSize(li.getSize());
-           this.areaImagen.setIcon((ImageIcon) li.get(0));
-           n=0;
+            this.areaImagen.setIcon((ImageIcon) li.get(0));
+            n = 0;
         }
 
     }//GEN-LAST:event_jButton6ActionPerformed
 ///////////////////////////ELIMINAR USUARIO
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       lu.delete(usuario.getText());
-       usuario.setText(lu.get(0).toString());
-       Biblioteca.setUsuario1(lu.get(0).toString());
+        lu.delete(usuario.getText());
+        usuario.setText(lu.get(0).toString());
+        Biblioteca.setUsuario1(lu.get(0).toString());
     }//GEN-LAST:event_jButton7ActionPerformed
 ////////////////GUARDAR EN MEMORIA
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        bit.writeObject(lc);
-        bit.writeObject(fimag);
-        bit.writeObject(li);
         bit.writeObject(lu);
+        bit1.writeObject(lc);
+        bit2.writeObject(li);
+        bit3.writeObject(fimag);
+
+
     }//GEN-LAST:event_jButton4ActionPerformed
 ////////LEER LA MEMORIA
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ///////////////////usuario
        
-        ListaDCircular readed=(ListaDCircular)bit.readObject();
+        ListUsuario readed = (ListUsuario) bit.readObject();
         
+
+        for (int i = 0; i < readed.getSize(); i++) {
+            lu.add(readed.get(i));
+        }
+        
+        ListaDCircular cat = (ListaDCircular) bit1.readObject();
+        
+        System.out.println(cat.getSize());
+        for (int i = 0; i < cat.getSize(); i++) {
+            lc.add(cat.get(i));
+        }
+      System.out.println("/////////////////////");
+        ListImag img = (ListImag) bit2.readObject();
+   
+        for (int i = 0; i < img.getSize(); i++) {
+            li.add(img.get(i));
+        }
+        System.out.println("xD");
+        auxlistimag aux = (auxlistimag) bit3.readObject();
       
-        
-       
+        for (int i = 0; i < aux.getSize(); i++) {
+            fimag.add(aux.get(i));
+        }
+        System.out.println("xD");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public void Cargarlista() {
@@ -406,6 +443,7 @@ public void usuariob(String usuario){
     private javax.swing.JLabel areaImagen;
     private javax.swing.JTextField cat;
     private javax.swing.JComboBox cat2;
+    private javax.swing.JTree categoria;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
@@ -418,6 +456,7 @@ public void usuariob(String usuario){
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables
 }
