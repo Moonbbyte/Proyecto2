@@ -60,14 +60,11 @@ public Object find2(Object e) {
             } else {
         for (int i = 0; i < size - 1; i++) {
 
-           if (primero.getValor().equals(e)) {
-                contador = 0;
-                break;
-            } else if (primero.getValor().equals(e)) {
+           if (actual.getValor().equals(e)) {
                 break;    
             }
              contador++;
-            primero =primero.getSiguiente();
+            actual=actual.getSiguiente();
         }}
 
         return contador;
