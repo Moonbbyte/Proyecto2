@@ -50,15 +50,15 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
         } else {
             for (int i = 0; i < size - 1; i++) {
 
-                if (primero.getValor().equals(e)) {
+                if (actual.getValor().equals(e)) {
                     contador = 50;
                     break;
-                } else if (primero.getValor().equals(e)) {
+                } else if (actual.getValor().equals(e)) {
                     contador = 50;
 
                     break;
                 }
-                primero = primero.getSiguiente();
+                actual = actual.getSiguiente();
             }
         }
 

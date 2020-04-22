@@ -64,6 +64,7 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
         jScrollPane1 = new javax.swing.JScrollPane();
         categoria = new javax.swing.JTree();
         jButton11 = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -181,6 +182,13 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
             }
         });
 
+        jToggleButton1.setText("s");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -201,16 +209,22 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(jButton1))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(0, 10, Short.MAX_VALUE))))
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(0, 0, Short.MAX_VALUE)
+                                                        .addComponent(jButton1))
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGap(0, 10, Short.MAX_VALUE))))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(24, 24, 24)
+                                                .addComponent(jToggleButton1)
+                                                .addGap(0, 0, Short.MAX_VALUE))))
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +285,10 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton11)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jToggleButton1)
+                                .addGap(31, 31, 31)
+                                .addComponent(jButton11))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(areaImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -409,13 +426,16 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
         
         BufferedImage img = null;
         String t = Imagen.getText();
-        Object z=fimag.find2(t);
+        
         try {
             img = ImageIO.read(new File("C:\\Users\\brand\\OneDrive\\Documentos\\NetBeansProjects\\Proyect 2\\Proyecto2\\Imagenes\\" + t + ".jpg"));
         } catch (Exception e) {
 
         }
+        /////////////////////////////////////////ESPACIO PARA AGRAGAR AL FICHERO DE NOMBRE DE IMAGENES//////////// para que no se repita
+        
         fimag.add(t);
+        /////////////////////////////////////////////////////////////////
         ImageIcon n = new ImageIcon(img);
         li.add(n);
 
@@ -436,11 +456,12 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
 ///////////////////////////cargar categoria
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
          DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) categoria.getSelectionPath().getLastPathComponent();
-        for(int i=0; i<lc.getSize();i++){
+        for(int i=0; i<lc.getSize()-1;i++){
          DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(lc.get(i));
          selectedNode.add(newNode);
         }
-     
+     DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
+          model.reload();
         
         
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -508,8 +529,15 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
         for(int i=0; i<fimag.getSize();i++){
          DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(fimag.get(i));
          selectedNode.add(newNode);
-        }        
+        }  
+        DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
+          model.reload();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+       fimag.Imprimir();
+               
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     public void Cargarlista() {
     
@@ -536,6 +564,7 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables
 }

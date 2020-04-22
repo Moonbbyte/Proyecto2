@@ -66,6 +66,7 @@ public Object find2(Object e) {
                 break;    
             }
              contador++;
+          
             actual =actual.getSiguiente();
         }}
 
