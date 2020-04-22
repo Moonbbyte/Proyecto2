@@ -1,8 +1,10 @@
-
 package proyecto_2;
+
 import java.io.Serializable;
+
 public class auxlistimag extends EstructuraDeDatos implements Serializable {
-     private static final long serialVersionUID=1L;
+
+    private static final long serialVersionUID = 1L;
     private NodoDoble primero, ultimo;
     private int size = 0;
 
@@ -12,6 +14,7 @@ public class auxlistimag extends EstructuraDeDatos implements Serializable {
 
     @Override
     public void add(Object e) {
+        
         NodoDoble nuevo = new NodoDoble(e, null, null);
         if (primero == null) {
             primero = nuevo;
@@ -44,31 +47,62 @@ public class auxlistimag extends EstructuraDeDatos implements Serializable {
             } else {
                 actual.getSiguiente();
                 contador++;
-                
+
             }
         }
         return contador;
     }
-public Object find2(Object e) {
+
+    public Object find2(Object e) {
         NodoDoble actual = primero;
         int contador = 0;
         actual = primero;
         Object t;
-         if (primero == null) {
-                contador = 60;
+        if (primero == null) {
+            contador = 60;
 
-            } else {
-        for (int i = 0; i < size - 1; i++) {
+        } else {
+            for (int i = 0; i < size - 1; i++) {
 
-           if (actual.getValor().equals(e)) {
-                break;    
+                if (actual.getValor().equals(e)) {
+                    break;
+                }
+                contador++;
+
+                actual = actual.getSiguiente();
             }
-             contador++;
-            actual=actual.getSiguiente();
-        }}
+        }
 
         return contador;
     }
+
+    public Object find3(Object e) {
+        NodoDoble actual = primero;
+        int contador = 0;
+        actual = primero;
+        Object t;
+        if (primero == null) {
+            contador = 60;
+
+        } else {
+            for (int i = 0; i < size; i++) {
+               
+                if (actual.getValor().equals(e)) {
+                    break;
+                }
+                
+                 contador++;
+                 if (contador == size) {
+                    contador = 60;
+                    break;
+                }
+                actual = actual.getSiguiente();
+            }
+        }
+
+        return contador;
+    }
+
     @Override
     public Object getNext() {
         NodoDoble actual = new NodoDoble();
@@ -96,9 +130,9 @@ public Object find2(Object e) {
     @Override
     public Object pop() {
         Object r = "Borrado el primer dato con exito";
-        primero=primero.getSiguiente();
+        primero = primero.getSiguiente();
         primero.getSiguiente().setAnterior(null);
-        
+
         size--;
         return r;
     }
@@ -108,62 +142,57 @@ public Object find2(Object e) {
         NodoDoble actual = new NodoDoble();
         NodoDoble atras = new NodoDoble();
         actual = primero;
-        atras= null;
+        atras = null;
         while (actual != null) {
-           
+
             if (actual.getValor().equals(e)) {
-               
+
                 if (actual.equals(primero)) {
-                   primero= primero.getSiguiente();
-                   primero.setAnterior(null);
-                } 
-                else {
-                    
+                    primero = primero.getSiguiente();
+                    primero.setAnterior(null);
+                } else {
+
                     atras.setSiguiente(actual.getSiguiente());
                     actual.getSiguiente().setAnterior(actual.getAnterior());
                 }
 
             }
-            atras=actual;
+            atras = actual;
             actual = actual.getSiguiente();
         }
         size--;
 
     }
-    
+
     public void delete2(Object e) {
         NodoDoble actual = new NodoDoble();
         NodoDoble atras = new NodoDoble();
-        int contador=0;
-        
+        int contador = 0;
+
         actual = primero;
-        atras= null;
-        
-        if((int)e==0){
-        primero= primero.getSiguiente();
-         primero.getSiguiente().setAnterior(null);
-        }else if((int)e==size-1){
-        ultimo=ultimo.getAnterior();
-        ultimo.setSiguiente(null);
-        
-        } else{
-            
-        while(contador<((int)e)){
-        atras=actual;
-        actual = actual.getSiguiente();    
-         contador++;
+        atras = null;
+
+        if ((int) e == 0) {
+            primero = primero.getSiguiente();
+            primero.getSiguiente().setAnterior(null);
+        } else if ((int) e == size - 1) {
+            ultimo = ultimo.getAnterior();
+            ultimo.setSiguiente(null);
+
+        } else {
+
+            while (contador < ((int) e)) {
+                atras = actual;
+                actual = actual.getSiguiente();
+                contador++;
+            }
+
+            atras.setSiguiente(actual.getSiguiente());
+            actual.getSiguiente().setAnterior(actual.getAnterior());
         }
-       
-        atras.setSiguiente(actual.getSiguiente());
-        actual.getSiguiente().setAnterior(actual.getAnterior());
-        }
-         size--;
+        size--;
 
     }
-    
-    
-    
-    
 
     public void ImprimirReversa() {
         NodoDoble actual = new NodoDoble();

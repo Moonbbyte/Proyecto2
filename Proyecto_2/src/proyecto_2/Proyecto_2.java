@@ -7,6 +7,8 @@ public class Proyecto_2 {
     m.setTitle("Usac Ligthroom");
     m.setVisible(true);
     
+    
+  
         
      
     }
