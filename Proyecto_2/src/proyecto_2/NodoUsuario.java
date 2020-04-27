@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class NodoUsuario implements Serializable{
      private static final long serialVersionUID=1L;
     private Object valor;
+   
     private NodoUsuario siguiente;
 
     public NodoUsuario(Object valor){
