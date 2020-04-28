@@ -16,17 +16,17 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
     public void add(Object e) {
         NodoCircular nuevo = new NodoCircular();
         nuevo.setValor(e);
-        if (primero == null) {
-            primero = nuevo;
-            primero.setSiguiente(primero);
-            nuevo.setAnterior(ultimo);
-            ultimo = nuevo;
+        if (getPrimero() == null) {
+            setPrimero(nuevo);
+            getPrimero().setSiguiente(getPrimero());
+            nuevo.setAnterior(getUltimo());
+            setUltimo(nuevo);
         } else {
-            ultimo.setSiguiente(nuevo);
-            nuevo.setSiguiente(primero);
-            nuevo.setAnterior(ultimo);
-            ultimo = nuevo;
-            primero.setAnterior(ultimo);
+            getUltimo().setSiguiente(nuevo);
+            nuevo.setSiguiente(getPrimero());
+            nuevo.setAnterior(getUltimo());
+            setUltimo(nuevo);
+            getPrimero().setAnterior(getUltimo());
         }
         size++;
 
@@ -34,41 +34,55 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
 
     @Override
     public Object peek() {
-        Object temp = primero.getValor();
+        Object temp = getPrimero().getValor();
         return temp;
     }
-
-    @Override
+@Override
     public Object find(Object e) {
-        NodoCircular actual = primero;
+        NodoCircular actual = new NodoCircular();
+        actual = getPrimero();
         int contador = 0;
-        actual = primero;
-        Object t;
-        if (primero == null) {
-            contador = 60;
-
-        } else {
-            for (int i = 0; i < size - 1; i++) {
-
-                if (actual.getValor().equals(e)) {
-                    contador = 50;
-                    break;
-                } else if (actual.getValor().equals(e)) {
-                    contador = 50;
-
-                    break;
-                }
-                actual = actual.getSiguiente();
+        while (actual != null) {
+            if (actual.getValor().equals(e)) {
+                break;
+            } else {
+                actual.getSiguiente();
+                contador++;
+                
             }
         }
+        return contador;
+    }
+    
+    public Object find2(Object e) {
+        NodoCircular actual = getPrimero();
+        int contador = 0;
+        actual = getPrimero();
+        Object t;
+         if (getPrimero() == null) {
+                contador = 60;
+
+         }
+         else {
+        for (int i = 0; i < size - 1; i++) {
+
+           if (actual.getValor().equals(e)) {
+                break;    
+            }
+             contador++;
+          
+            actual =actual.getSiguiente();
+        }}
 
         return contador;
     }
-
+    
+    
+    
     @Override
     public Object getNext() {
         NodoCircular actual = new NodoCircular();
-        actual = primero.getSiguiente();
+        actual = getPrimero().getSiguiente();
         Object valor = actual.getValor();
         return valor;
 
@@ -82,7 +96,7 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
     @Override
     public Object get(int i) {
         int contador = 0;
-        NodoCircular temp = primero;
+        NodoCircular temp = getPrimero();
         while (contador < i) {
             temp = temp.getSiguiente();
             contador++;
@@ -93,9 +107,9 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
     @Override
     public Object pop() {
         Object r = "se elimino con exito el primer valor";
-        primero = primero.getSiguiente();
-        ultimo.setSiguiente(primero);
-        primero.setAnterior(ultimo);
+        setPrimero(getPrimero().getSiguiente());
+        getUltimo().setSiguiente(getPrimero());
+        getPrimero().setAnterior(getUltimo());
         size--;
 
         return r;
@@ -105,18 +119,18 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
     public void delete(Object e) {
         NodoCircular actual = new NodoCircular();
         NodoCircular anterior = new NodoCircular();
-        actual = primero;
-        anterior = ultimo;
+        actual = getPrimero();
+        anterior = getUltimo();
         do {
             if (actual.getValor().equals(e)) {
-                if (actual == primero) {
-                    primero = primero.getSiguiente();
-                    ultimo.setSiguiente(primero);
-                    primero.setAnterior(ultimo);
-                } else if (actual == ultimo) {
-                    ultimo = anterior;
-                    primero.setAnterior(ultimo);
-                    ultimo.setSiguiente(primero);
+                if (actual == getPrimero()) {
+                    setPrimero(getPrimero().getSiguiente());
+                    getUltimo().setSiguiente(getPrimero());
+                    getPrimero().setAnterior(getUltimo());
+                } else if (actual == getUltimo()) {
+                    setUltimo(anterior);
+                    getPrimero().setAnterior(getUltimo());
+                    getUltimo().setSiguiente(getPrimero());
                 } else {
                     anterior.setSiguiente(actual.getSiguiente());
                     actual.getSiguiente().setAnterior(anterior);
@@ -127,18 +141,18 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
 
             anterior = actual;
             actual = actual.getSiguiente();
-        } while (actual != primero);
+        } while (actual != getPrimero());
         size--;
     }
 
     public void imprimir() {
         NodoCircular nv = new NodoCircular();
-        nv = primero;
+        nv = getPrimero();
         do {
             System.out.println(nv.getValor());
             nv = nv.getSiguiente();
 
-        } while (nv != primero);
+        } while (nv != getPrimero());
 
     }
 
@@ -147,6 +161,34 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
      */
     public void setSize(int size) {
         this.size = size;
+    }
+
+    /**
+     * @return the primero
+     */
+    public NodoCircular getPrimero() {
+        return primero;
+    }
+
+    /**
+     * @param primero the primero to set
+     */
+    public void setPrimero(NodoCircular primero) {
+        this.primero = primero;
+    }
+
+    /**
+     * @return the ultimo
+     */
+    public NodoCircular getUltimo() {
+        return ultimo;
+    }
+
+    /**
+     * @param ultimo the ultimo to set
+     */
+    public void setUltimo(NodoCircular ultimo) {
+        this.ultimo = ultimo;
     }
 
 }

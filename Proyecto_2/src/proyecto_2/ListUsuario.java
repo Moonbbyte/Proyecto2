@@ -2,8 +2,9 @@ package proyecto_2;
 
 import java.io.Serializable;
 
-public class ListUsuario extends EstructuraDeDatos implements Serializable{
-     private static final long serialVersionUID=1L;
+public class ListUsuario extends EstructuraDeDatos implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private NodoUsuario cabeza;
     private int size;
@@ -42,14 +43,14 @@ public class ListUsuario extends EstructuraDeDatos implements Serializable{
 
         for (int i = 0; i < size - 1; i++) {
             temp = temp.getSiguiente();
-            
+
             if (cabeza.getValor().equals(e)) {
                 contador = 0;
-                contador=50;
+                contador = 50;
                 break;
             } else if (temp.getValor().equals(e)) {
-                contador=50;
-                
+                contador = 50;
+
                 break;
             }
             contador++;
@@ -57,6 +58,51 @@ public class ListUsuario extends EstructuraDeDatos implements Serializable{
 
         return contador;
     }
+
+    public Object find2(Object e) {
+        NodoUsuario temp = cabeza;
+        Object t;
+        int contador = 0;
+        if (cabeza == null) {
+            contador = 60;
+        } else {
+            for (int i = 0; i < size; i++) {
+               
+
+                if (temp.getValor().equals(e)) {
+                    break;
+                }
+                contador++;
+            if (contador == size) {
+                    contador = 60;
+                    break;
+                }
+                temp = temp.getSiguiente();
+
+            }
+
+        }
+
+        return contador;
+
+    }
+    ////////////////////retorno de nodos
+    public NodoUsuario getNodo(int e){
+    NodoUsuario temp= cabeza;
+    int contador=0;
+   if(e==0){
+   }else{
+   while(contador<e){
+   temp=temp.getSiguiente();
+   contador++;
+   
+   }
+   
+   }
+    return temp;
+    }
+    
+    
 
     @Override
     public Object getNext() {
@@ -90,21 +136,21 @@ public class ListUsuario extends EstructuraDeDatos implements Serializable{
 
     @Override
     public void delete(Object e) {
-        NodoUsuario actual=new NodoUsuario();
-         NodoUsuario anterior=new NodoUsuario();
-        actual=cabeza;
-        while(actual!=null){
-          if(actual.getValor().equals(e)){
-                if(actual.equals(cabeza)){
-                cabeza=cabeza.getSiguiente();
-                }else{
-                anterior.setSiguiente(actual.getSiguiente());
-                }  
-          }
-        anterior=actual;
-       actual=actual.getSiguiente();
+        NodoUsuario actual = new NodoUsuario();
+        NodoUsuario anterior = new NodoUsuario();
+        actual = cabeza;
+        while (actual != null) {
+            if (actual.getValor().equals(e)) {
+                if (actual.equals(cabeza)) {
+                    cabeza = cabeza.getSiguiente();
+                } else {
+                    anterior.setSiguiente(actual.getSiguiente());
+                }
+            }
+            anterior = actual;
+            actual = actual.getSiguiente();
         }
-       
+
         size--;
     }
 
