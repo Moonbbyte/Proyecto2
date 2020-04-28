@@ -9,7 +9,7 @@ public class NodoCircular implements Serializable {
     private static final long serialVersionUID=1L;
     private Object valor;
     private NodoCircular siguiente,anterior;
-
+    
     public NodoCircular(){}
     public NodoCircular(Object valor, NodoCircular s, NodoCircular a){
     this.valor=valor;
@@ -41,5 +41,7 @@ public class NodoCircular implements Serializable {
     public void setAnterior(NodoCircular anterior) {
         this.anterior = anterior;
     }
+
+    
     
 }

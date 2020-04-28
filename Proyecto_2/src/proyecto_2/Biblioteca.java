@@ -14,29 +14,25 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-   
     BitManager bit = new BitManager();
     BitManager1 bit1 = new BitManager1();
     BitManager2 bit2 = new BitManager2();
     BitManager3 bit3 = new BitManager3();
-
+    static int cambio=0;
     private static String usuario1;
     ////li lista imagenes lc lista categorias
-    ListaDCircular li  = new ListaDCircular();
+    ListaDCircular li = new ListaDCircular();
     auxlistimag fimag = new auxlistimag();
     ListDoble lc = new ListDoble();
     ListUsuario lu = new ListUsuario();
+
     static int n = 0;
-    private static Object users=0;
-    
-    
+    private static Object users = 0;
 
     public Biblioteca() {
 
         initComponents();
         this.setLocationRelativeTo(null);
-      
-        
 
     }
 
@@ -318,70 +314,83 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
     }// </editor-fold>//GEN-END:initComponents
 /////////////////atras
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        if (n < 0) {
+        cambio++;
+        Object categoriacombo = c2.getSelectedItem().toString();
+        Object indexcategoria = lu.getNodo((int) users).getCategorias().find2(categoriacombo);
+        NodoCircular Nodotemp = lu.getNodo((int) users).getCategorias().getNodo((int) indexcategoria).getImagenes().getPrimero();
+        for(int i=0; i<cambio;i++){
+        Nodotemp=Nodotemp.getAnterior();
+        
+        }
+        this.areaImagen.setIcon((ImageIcon)Nodotemp.getValor());
+       
+        
+        /*if (n < 0) {
             JOptionPane.showMessageDialog(null, "Ya llego a la primera imagen");
             n = 1;
         } else {
             this.areaImagen.setIcon((ImageIcon) li.get(n--));
-        }
+        }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 ////////////////////adelante
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        cambio++;
         Object categoriacombo = c2.getSelectedItem().toString();
-        Object indexcategoria= lu.getNodo((int)users).getCategorias().find2(categoriacombo);
+        Object indexcategoria = lu.getNodo((int) users).getCategorias().find2(categoriacombo);
+        NodoCircular Nodotemp = lu.getNodo((int) users).getCategorias().getNodo((int) indexcategoria).getImagenes().getPrimero();
+        for(int i=0; i<cambio;i++){
+        Nodotemp=Nodotemp.getSiguiente();
         
-         this.areaImagen.setIcon((ImageIcon) lu.getNodo((int)users).getCategorias().getNodo((int)indexcategoria).getImagenes().getPrimero().getSiguiente().getValor() );
-        
-        try {
-
-            this.areaImagen.setIcon((ImageIcon) li.get(n++));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ya llego a la ultima imagen");
-            n = li.getSize() - 1;
         }
+        this.areaImagen.setIcon((ImageIcon)Nodotemp.getValor());
+
+        /* try {
+
+         this.areaImagen.setIcon((ImageIcon) li.get(n++));
+         } catch (Exception e) {
+         JOptionPane.showMessageDialog(null, "Ya llego a la ultima imagen");
+         n = li.getSize() - 1;
+         }*/
     }//GEN-LAST:event_jButton2ActionPerformed
 ///////////////////////////CREAR CATEGORIA
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-           c2.removeAllItems();
-      lu.getNodo((int)users).getCategorias().add(cat.getText());  
-      for(int i=0; i<lu.getNodo((int)users).getCategorias().getSize();i++){
-      c2.addItem(lu.getNodo((int)users).getCategorias().get(i));
-      
-      }
-      
-        try{  //////////////////////////agregar elementos al arbol
-        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) categoria.getSelectionPath().getLastPathComponent();
-         DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(cat.getText());
-         selectedNode.add(newNode);
-          DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
-          model.reload();
-        
-       //////////////////////////////////////////////////////////////////// 
-        
-        } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"Debe de seleccionar la categoria donde guardara el archivo");
+        c2.removeAllItems();
+        lu.getNodo((int) users).getCategorias().add(cat.getText());
+        for (int i = 0; i < lu.getNodo((int) users).getCategorias().getSize(); i++) {
+            c2.addItem(lu.getNodo((int) users).getCategorias().get(i));
+
         }
-       
-        
-        
+
+        try {  //////////////////////////agregar elementos al arbol
+            DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) categoria.getSelectionPath().getLastPathComponent();
+            DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(cat.getText());
+            selectedNode.add(newNode);
+            DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
+            model.reload();
+
+       //////////////////////////////////////////////////////////////////// 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar la categoria donde guardara el archivo");
+        }
+
+
     }//GEN-LAST:event_jButton8ActionPerformed
-    
-   ///////////////////////////////////////////////////////////////////////////////////// 
+
+    ///////////////////////////////////////////////////////////////////////////////////// 
     public void usuariob(String usuario) {
         Object numero = lu.find(usuario);
         String nombre = usuario;
         if ((int) numero == 50) {
             Biblioteca.setUsuario1(nombre);
             setUsers(lu.find2(usuario));
-            
+
         } else {
-            JOptionPane.showMessageDialog(null,"Usuario creado");
+            JOptionPane.showMessageDialog(null, "Usuario creado");
             lu.add(usuario);
             Biblioteca.setUsuario1(nombre);
-           setUsers(lu.find2(usuario));
+            setUsers(lu.find2(usuario));
         }
-        
+
     }
 
 /////////////////ELIMINAR CATEGORIA
@@ -390,71 +399,58 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
         DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
         model.removeNodeFromParent(selectedNode);
         Object t = lc.find(selectedNode);
-        
-        
-        if ((int) t == 60){
+
+        if ((int) t == 60) {
             JOptionPane.showMessageDialog(null, "Lo que se esta tratando de eliminar no es una categoria");
-        }
-         else if ((int) t == 50) {
-           lc.delete(selectedNode);
-            
+        } else if ((int) t == 50) {
+            lc.delete(selectedNode);
+
         }
 
 
     }//GEN-LAST:event_jButton9ActionPerformed
 /////////////////////////CARGAR IMAGEN
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-Object categoriacombo = c2.getSelectedItem().toString();
-        
-
-
+        Object categoriacombo = c2.getSelectedItem().toString();
 
 //////////////////////////////////meter imagenes
-        
-       try{ DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) categoria.getSelectionPath().getLastPathComponent();
-         DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(Imagen.getText());
-         selectedNode.add(newNode);
-         
-          DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
-          model.reload();
-        ///////////////////////////////////////////////mostrar imagenes
-        
-        BufferedImage img = null;
-        String t = Imagen.getText();
-        
         try {
-            img = ImageIO.read(new File("C:\\Users\\brand\\OneDrive\\Documentos\\NetBeansProjects\\Proyect 2\\Proyecto2\\Imagenes\\" + t + ".jpg"));
-        } catch (Exception e) {
+            DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) categoria.getSelectionPath().getLastPathComponent();
+            DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(Imagen.getText());
+            selectedNode.add(newNode);
 
-        }
-        
-        
-        
-        
-        
-        
-        
-        Object x= fimag.find3(t);
+            DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
+            model.reload();
+        ///////////////////////////////////////////////mostrar imagenes
+
+            BufferedImage img = null;
+            String t = Imagen.getText();
+
+            try {
+                img = ImageIO.read(new File("C:\\Users\\brand\\OneDrive\\Documentos\\NetBeansProjects\\Proyect 2\\Proyecto2\\Imagenes\\" + t + ".jpg"));
+            } catch (Exception e) {
+
+            }
+
+            Object x = fimag.find3(t);
         /////////////////////////////////////////ESPACIO PARA AGRAGAR AL FICHERO DE NOMBRE DE IMAGENES//////////// para que no se repita
-       
-        if((int)x==60){
-        fimag.add(t);}
-        /////////////////////////////////////////////////////////////////
-        ImageIcon n = new ImageIcon(img);
-        li.add(n);
-        
-        //////////////////////COMO YA TENGO INDICE DE USUARIO CON USERS AHORA ME FALTA INDICE DE NODOS
-           Object indexcategoria= lu.getNodo((int)users).getCategorias().find2(categoriacombo);
-        
-        ////////////////////AHORA YA TENGO LA POSICION DONDE COLOCARE MIS IMAGENES
-           lu.getNodo((int)users).getCategorias().getNodo((int)indexcategoria).getImagenes().add(n);
-       
-           
-        
-        
 
-        this.areaImagen.setIcon((ImageIcon) lu.getNodo((int)users).getCategorias().getNodo((int)indexcategoria).getImagenes().get(0) );} catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"Debe de seleccionar la categoria donde guardara el archivo");
+            if ((int) x == 60) {
+                fimag.add(t);
+            }
+            /////////////////////////////////////////////////////////////////
+            ImageIcon n = new ImageIcon(img);
+            li.add(n);
+
+            //////////////////////COMO YA TENGO INDICE DE USUARIO CON USERS AHORA ME FALTA INDICE DE NODOS
+            Object indexcategoria = lu.getNodo((int) users).getCategorias().find2(categoriacombo);
+
+            ////////////////////AHORA YA TENGO LA POSICION DONDE COLOCARE MIS IMAGENES
+            lu.getNodo((int) users).getCategorias().getNodo((int) indexcategoria).getImagenes().add(n);
+
+            this.areaImagen.setIcon((ImageIcon) lu.getNodo((int) users).getCategorias().getNodo((int) indexcategoria).getImagenes().get(0));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar la categoria donde guardara el archivo");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 //////////////////////ELIMINAR IMAGENES
@@ -462,22 +458,21 @@ Object categoriacombo = c2.getSelectedItem().toString();
         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) categoria.getSelectionPath().getLastPathComponent();
         DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
         model.removeNodeFromParent(selectedNode);
-        
+
        ////////////////AQUI SOLO LAS ELIMINO DEL PANEL PUES PUEDEN EXISTIR EN OTRAS CATEGORIAS DICHAS IMAGENES 
-        
-        
+
     }//GEN-LAST:event_jButton6ActionPerformed
 ///////////////////////////cargar categoria
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) categoria.getSelectionPath().getLastPathComponent();
-        for(int i=0; i<lc.getSize();i++){
-         DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(lc.get(i));
-         selectedNode.add(newNode);
+        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) categoria.getSelectionPath().getLastPathComponent();
+        for (int i = 0; i < lc.getSize(); i++) {
+            DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(lc.get(i));
+            selectedNode.add(newNode);
         }
-     DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
-          model.reload();
-        
-        
+        DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
+        model.reload();
+
+
     }//GEN-LAST:event_jButton7ActionPerformed
 ////////////////GUARDAR EN MEMORIA
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -491,47 +486,45 @@ Object categoriacombo = c2.getSelectedItem().toString();
 ////////LEER LA MEMORIA
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         ///////////////////usuario
-       
+
         ListUsuario readed = (ListUsuario) bit.readObject();
         for (int i = 0; i < readed.getSize(); i++) {
             lu.add(readed.get(i));
         }
         ListaDCircular cat = (ListaDCircular) bit1.readObject();
-        
-       
+
         for (int i = 0; i < cat.getSize(); i++) {
             lc.add(cat.get(i));
         }
-     
+
         ListDoble img = (ListDoble) bit2.readObject();
-   
+
         for (int i = 0; i < img.getSize(); i++) {
             li.add(img.get(i));
         }
         auxlistimag aux = (auxlistimag) bit3.readObject();
-      
+
         for (int i = 0; i < aux.getSize(); i++) {
             fimag.add(aux.get(i));
-        }  
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 ////////////////MOUSE CLICKED
     private void categoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoriaMouseClicked
     /////mostrar imagenes
-       // li find n=find
-        TreeSelectionModel am= categoria.getSelectionModel();
-    if(am.getSelectionCount()>0){
-    DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) categoria.getSelectionPath().getLastPathComponent();
-        
-    
-    Object t=fimag.find2(selectedNode.getUserObject());
-        
-       if((int)t!=60 && (int)t!=fimag.getSize()){
-        this.areaImagen.setIcon((ImageIcon)li.get((int)t));
-        n=(int)t;
+        // li find n=find
+        TreeSelectionModel am = categoria.getSelectionModel();
+        if (am.getSelectionCount() > 0) {
+            DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) categoria.getSelectionPath().getLastPathComponent();
+
+            Object t = fimag.find2(selectedNode.getUserObject());
+
+            if ((int) t != 60 && (int) t != fimag.getSize()) {
+                this.areaImagen.setIcon((ImageIcon) li.get((int) t));
+                n = (int) t;
+            }
         }
-               }
-    
-    
+
+
     }//GEN-LAST:event_categoriaMouseClicked
 
     private void categoriaComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_categoriaComponentRemoved
@@ -539,20 +532,19 @@ Object categoriacombo = c2.getSelectedItem().toString();
     }//GEN-LAST:event_categoriaComponentRemoved
 //////////////////CARGAR IMAGENES
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-    
-        
+
         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) categoria.getSelectionPath().getLastPathComponent();
-        for(int i=0; i<fimag.getSize();i++){
-         DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(fimag.get(i));
-         selectedNode.add(newNode);
-        }  
+        for (int i = 0; i < fimag.getSize(); i++) {
+            DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(fimag.get(i));
+            selectedNode.add(newNode);
+        }
         DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
-          model.reload();
+        model.reload();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     public void Cargarlista() {
-    
-    usuario.setText(lu.get(0).toString());
+
+        usuario.setText(lu.get(0).toString());
     }
 
     /**

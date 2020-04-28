@@ -5,7 +5,12 @@ import java.io.Serializable;
 public class ListaDCircular extends EstructuraDeDatos implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+  
     private NodoCircular primero, ultimo;
+    private static NodoCircular tempo;
+    
+    
     private int size;
 
     public ListaDCircular() {
@@ -103,7 +108,14 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
         }
         return temp.getValor();
     }
-
+/////////////////////////////////////siguiente
+    
+    
+    public NodoCircular getSigui(){
+    tempo=tempo.getSiguiente();
+    return tempo;
+    }
+    
     @Override
     public Object pop() {
         Object r = "se elimino con exito el primer valor";
@@ -190,5 +202,5 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
     public void setUltimo(NodoCircular ultimo) {
         this.ultimo = ultimo;
     }
-
+ 
 }
