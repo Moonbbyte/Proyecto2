@@ -427,7 +427,7 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
             String t = Imagen.getText();
 
             try {
-                img = ImageIO.read(new File("C:\\Users\\brand\\OneDrive\\Documentos\\NetBeansProjects\\Proyect 2\\Proyecto2\\Imagenes\\" + t + ".jpg"));
+                img = ImageIO.read(new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + t + ".jpg"));
             } catch (Exception e) {
 
             }
