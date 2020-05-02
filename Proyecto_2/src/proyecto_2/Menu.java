@@ -5,6 +5,7 @@ package proyecto_2;
 public class Menu extends javax.swing.JFrame {
 ListUsuario lu=new ListUsuario();
 Biblioteca b=new Biblioteca();
+Editor edi= new Editor();
     
     public Menu() {
         initComponents();
@@ -66,6 +67,11 @@ Biblioteca b=new Biblioteca();
         jLabel3.setOpaque(true);
 
         jButton2.setText("Ingresar a Editor");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Ingresar a Convertidor");
 
@@ -143,6 +149,11 @@ Biblioteca b=new Biblioteca();
        
       
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        edi.setTitle("Editor");
+        edi.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
