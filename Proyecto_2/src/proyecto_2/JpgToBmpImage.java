@@ -45,7 +45,7 @@ public class JpgToBmpImage extends ImageHandler {
 
     @Override
     public void generateFiles() throws Exception {
-                        salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\copia-"+getNombre()+".bmp");
+                        salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\converted-"+getNombre()+".bmp");
                         salida.write(img);
                         salida.close();
                   
