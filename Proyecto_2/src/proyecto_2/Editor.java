@@ -12,10 +12,13 @@ public class Editor extends javax.swing.JFrame {
 
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
+    static String str;
     FileOutputStream salida;
-    byte[] bytesimag;
-    BmptoJpegImage Btj = new BmptoJpegImage("x");
+    static byte[] bytesimag;
+
     JpgToBmpImage Jtb = new JpgToBmpImage("x");
+
+    BmptoJpegImage Btj = new BmptoJpegImage("x");
 
     public Editor() {
         initComponents();
@@ -29,14 +32,12 @@ public class Editor extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        imagen = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        tipo = new javax.swing.JComboBox<>();
         ima = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,10 +54,6 @@ public class Editor extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        imagen.setBackground(new java.awt.Color(255, 255, 255));
-        imagen.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        imagen.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton3.setText("COPIA JPEG");
 
@@ -75,8 +72,6 @@ public class Editor extends javax.swing.JFrame {
             }
         });
 
-        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "jpg", "bmp" }));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -94,17 +89,10 @@ public class Editor extends javax.swing.JFrame {
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(imagen))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jButton7))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                         .addComponent(ima, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15))
         );
@@ -116,20 +104,19 @@ public class Editor extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton2)
-                                .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton7)
+                                .addGap(34, 34, 34)))
                         .addComponent(jButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6))
@@ -154,19 +141,29 @@ public class Editor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 ////////////////AGREGAR IMAGEN
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JpgToBmpImage cargar = new JpgToBmpImage("x");
+
         if (seleccionado.showDialog(this, "Abrir archivo") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
             if (archivo.canRead()) {
+
                 if (archivo.getName().endsWith("jpg")) {
                     try {
+
                         Jtb.setArchivo(archivo);
                         Jtb.readFile();
                         bytesimag = Jtb.img;
 
-                        this.ima.setIcon(new ImageIcon(bytesimag));
-                        System.out.println("xD");
+                    } catch (Exception e) {
+                    }
 
-                        Jtb.generateFiles();
+                }else if (archivo.getName().endsWith("bmp")) {
+                    try {
+
+                        Btj.setArchivo(archivo);
+                        Btj.readFile();
+                        bytesimag = Btj.img;
+
                     } catch (Exception e) {
                     }
 
@@ -178,16 +175,30 @@ public class Editor extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
-
+////////////////////////CONVERTIR IMAGEN
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.str = archivo.getName();
+        try {
+            if (str.endsWith("jpg")) {
+                System.out.println(str);
+                this.ima.setIcon(new ImageIcon(bytesimag));
+                Jtb.setNombre(this.str.substring(0, str.length() - 4));
+                Jtb.generateFiles();
+            } else if (str.endsWith("bmp")) {
+                System.out.println(str);
+                this.ima.setIcon(new ImageIcon(bytesimag));
+                Btj.setNombre(this.str.substring(0, str.length() - 4));
+                Btj.generateFiles();
+            }
+        } catch (Exception e) {
 
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ima;
-    private javax.swing.JTextField imagen;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -197,6 +208,5 @@ public class Editor extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<String> tipo;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class JpgToBmpImage extends ImageHandler {
-
+   private  String nombre="xD";
     FileInputStream entrada;
     FileOutputStream salida;
    byte[] img;
@@ -14,6 +14,7 @@ public class JpgToBmpImage extends ImageHandler {
 
     public JpgToBmpImage(String filename) {
         super(filename);
+        
     }
 
     @Override
@@ -44,10 +45,10 @@ public class JpgToBmpImage extends ImageHandler {
 
     @Override
     public void generateFiles() throws Exception {
-                        salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\file.bmp");
+                        salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\copia-"+getNombre()+".bmp");
                         salida.write(img);
                         salida.close();
-                        System.out.println("xD");
+                  
     }
 
     public File getArchivo() {
@@ -56,6 +57,20 @@ public class JpgToBmpImage extends ImageHandler {
 
     public void setArchivo(File archivo) {
         this.archivo = archivo;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
 }
