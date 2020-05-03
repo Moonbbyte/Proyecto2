@@ -1,6 +1,7 @@
 
 package proyecto_2;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
@@ -28,6 +29,11 @@ public class JpegImageCopy extends ImageHandler {
 		salida.write(filebytes);
 		salida.close();
 		System.out.println("Imagen generada: " + this.handledFileName);
+                System.out.println("xD");
+       
+                ///////////////////////si se quiero borrar el archivo algun archivo copiado////////////////////////
+              /*  File fichero= new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\copia-"+this.handledFileName+".bmp");         
+                fichero.delete();*/
     
     }
     
