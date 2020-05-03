@@ -9,6 +9,7 @@ import java.io.*;
 *	@version 1.0
 **/
 public class BmpHandlerCopy extends ImageHandler {
+    FileOutputStream salida;
 
 	/**
 	*	Array of bytes that will allocate all header and data for original file
@@ -26,15 +27,16 @@ public class BmpHandlerCopy extends ImageHandler {
 	**/
 	public BmpHandlerCopy(String imagename) {
 		super(imagename);
-		this.copyname = "copy-" + imagename;
+		this.copyname = "copia-" + imagename;
 	}
 
 	/**
 	*	Reads handled file header and data in bytes
 	**/
 	public void readFile() throws Exception {
-		FileInputStream input = new FileInputStream(this.handledFileName);
-		filebytes = new byte[input.available()];
+		FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\converted-"+this.handledFileName+".bmp");
+		          System.out.println(this.handledFileName);
+                filebytes = new byte[input.available()];
 		input.read(filebytes);
 		input.close();
 		System.out.println("Imagen leida: " + this.handledFileName);
@@ -44,9 +46,11 @@ public class BmpHandlerCopy extends ImageHandler {
 	* 	file will be build by the same name preceeded of "copy-"
 	**/	
 	public void generateFiles() throws Exception {
-		FileOutputStream output = new FileOutputStream(copyname);
-		output.write(filebytes);
-		output.close();
+	salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\"+this.copyname+".bmp");
+		salida.write(filebytes);
+		salida.close();
 		System.out.println("Imagen generada: " + copyname);
-	}
+        
+        }
+	
 }

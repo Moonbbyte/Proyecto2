@@ -32,6 +32,7 @@ public class BmptoJpegImage extends ImageHandler {
         try {
             entrada = new FileInputStream(archivo);
             entrada.read(img1);
+            entrada.close();
 
         } catch (Exception e) {
             System.out.println(e);

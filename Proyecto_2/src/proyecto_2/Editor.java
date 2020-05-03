@@ -2,6 +2,7 @@ package proyecto_2;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import javax.imageio.ImageIO;
@@ -15,10 +16,9 @@ public class Editor extends javax.swing.JFrame {
     static String str;
     FileOutputStream salida;
     static byte[] bytesimag;
-
     JpgToBmpImage Jtb = new JpgToBmpImage("x");
-
     BmptoJpegImage Btj = new BmptoJpegImage("x");
+    
 
     public Editor() {
         initComponents();
@@ -56,6 +56,11 @@ public class Editor extends javax.swing.JFrame {
         });
 
         jButton3.setText("COPIA JPEG");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("ROJO VERDE AZUL SEPIA");
 
@@ -157,7 +162,7 @@ public class Editor extends javax.swing.JFrame {
                     } catch (Exception e) {
                     }
 
-                }else if (archivo.getName().endsWith("bmp")) {
+                } else if (archivo.getName().endsWith("bmp")) {
                     try {
 
                         Btj.setArchivo(archivo);
@@ -195,6 +200,32 @@ public class Editor extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+/////////////////////////////COPIAR IMAGEN JPG
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       this.str = archivo.getName();
+        try {
+           ///////////////PRIMER PASO CONVERTIR A BMP UNA IMAGEN JPG
+            
+            if (str.endsWith("jpg")) {
+                System.out.println(str);
+                this.ima.setIcon(new ImageIcon(bytesimag));
+                Jtb.setNombre(this.str.substring(0, str.length() - 4));
+                Jtb.generateFiles();
+                ////////////////////////////////////SEGUNDO PASO REALIZAR UNA COPIA DE UN BMP
+               BmpHandlerCopy Bcopy= new BmpHandlerCopy(str.substring(0,str.length()-4));
+               Bcopy.readFile();
+               Bcopy.generateFiles();
+                /////////////////////////////TERCER PASO CONVERTIR LA COPIA DE BMP A JPG
+                JpegImageCopy Jcopy= new JpegImageCopy(str.substring(0,str.length()-4));
+                Jcopy.readFile();
+                Jcopy.generateFiles();
+                
+            } 
+            
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
