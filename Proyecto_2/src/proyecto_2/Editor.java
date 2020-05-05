@@ -73,6 +73,11 @@ public class Editor extends javax.swing.JFrame {
         jButton5.setText("MODIFICAR IMAGEN");
 
         jButton6.setText("BLANCO Y NEGRO");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Ejecutar");
 
@@ -239,12 +244,30 @@ public class Editor extends javax.swing.JFrame {
         JpegImageHandlerColors Jc= new JpegImageHandlerColors(str.substring(0, str.length()-4));   
         Jc.readFile();
         Jc.generateFiles();
-            
+        ////////////////////////SEPIA
+        Jc.sepia();
+        Jc.green();
+        Jc.red();
+        Jc.blue();
+        Jc.pasarBmpajpg();
         } catch (Exception e) {
         }
 
 
     }//GEN-LAST:event_jButton4ActionPerformed
+/////////////////BLANCO Y NEGRO
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+      this.str=archivo.getName();
+        try {
+            ///////////PRIMER PASO CONVERTIR A BMP EL ARCHIVO 
+        JpegImageHandlerBn Bn= new JpegImageHandlerBn(str.substring(0, str.length()-4));   
+        Bn.readFile();
+        Bn.generateFiles();
+        ////////////////////////SEPIA
+       Bn.BN();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
