@@ -42,6 +42,19 @@ public class JpegImageHandlerBn extends ImageHandler {
         salida.close();
         System.out.println("Imagen generada: " + this.handledFileName);
            }
+    public void convertirjpg() throws Exception {
+    FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\BN-" + this.handledFileName + ".bmp");
+        filebytes = new byte[input.available()];
+        input.read(filebytes);
+        input.close();
+        salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\BN-" + this.handledFileName + ".jpg");
+        salida.write(filebytes);
+        salida.close();
+    
+    }
+    
+    
+    
     public void BN() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {

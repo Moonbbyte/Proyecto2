@@ -265,6 +265,7 @@ public class Editor extends javax.swing.JFrame {
         Bn.generateFiles();
         ////////////////////////SEPIA
        Bn.BN();
+       Bn.convertirjpg();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
