@@ -18,14 +18,15 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
     BitManager1 bit1 = new BitManager1();
     BitManager2 bit2 = new BitManager2();
     BitManager3 bit3 = new BitManager3();
-    static int cambio=0;
+    static int cambio = 0;
     private static String usuario1;
     ////li lista imagenes lc lista categorias
     ListaDCircular li = new ListaDCircular();
     auxlistimag fimag = new auxlistimag();
     ListDoble lc = new ListDoble();
     ListUsuario lu = new ListUsuario();
-
+    Convertidor con = new Convertidor();
+    private static Object catConvertidor, imagConvertidor;
     static int n = 0;
     private static Object users = 0;
 
@@ -318,13 +319,12 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
         Object categoriacombo = c2.getSelectedItem().toString();
         Object indexcategoria = lu.getNodo((int) users).getCategorias().find2(categoriacombo);
         NodoCircular Nodotemp = lu.getNodo((int) users).getCategorias().getNodo((int) indexcategoria).getImagenes().getPrimero();
-        for(int i=0; i<cambio;i++){
-        Nodotemp=Nodotemp.getAnterior();
-        
+        for (int i = 0; i < cambio; i++) {
+            Nodotemp = Nodotemp.getAnterior();
+
         }
-        this.areaImagen.setIcon((ImageIcon)Nodotemp.getValor());
-       
-        
+        this.areaImagen.setIcon((ImageIcon) Nodotemp.getValor());
+
         /*if (n < 0) {
             JOptionPane.showMessageDialog(null, "Ya llego a la primera imagen");
             n = 1;
@@ -338,11 +338,11 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
         Object categoriacombo = c2.getSelectedItem().toString();
         Object indexcategoria = lu.getNodo((int) users).getCategorias().find2(categoriacombo);
         NodoCircular Nodotemp = lu.getNodo((int) users).getCategorias().getNodo((int) indexcategoria).getImagenes().getPrimero();
-        for(int i=0; i<cambio;i++){
-        Nodotemp=Nodotemp.getSiguiente();
-        
+        for (int i = 0; i < cambio; i++) {
+            Nodotemp = Nodotemp.getSiguiente();
+
         }
-        this.areaImagen.setIcon((ImageIcon)Nodotemp.getValor());
+        this.areaImagen.setIcon((ImageIcon) Nodotemp.getValor());
 
         /* try {
 
@@ -354,8 +354,13 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_jButton2ActionPerformed
 ///////////////////////////CREAR CATEGORIA
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+
         c2.removeAllItems();
         lu.getNodo((int) users).getCategorias().add(cat.getText());
+       // agregando a editor
+        con.agregarCategorias(cat.getText(), (int)users);
+       ////////////////////
+        
         for (int i = 0; i < lu.getNodo((int) users).getCategorias().getSize(); i++) {
             c2.addItem(lu.getNodo((int) users).getCategorias().get(i));
 
@@ -368,7 +373,7 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
             DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
             model.reload();
 
-       //////////////////////////////////////////////////////////////////// 
+            //////////////////////////////////////////////////////////////////// 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe de seleccionar la categoria donde guardara el archivo");
         }
@@ -421,7 +426,7 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
 
             DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
             model.reload();
-        ///////////////////////////////////////////////mostrar imagenes
+            ///////////////////////////////////////////////mostrar imagenes
 
             BufferedImage img = null;
             String t = Imagen.getText();
@@ -433,7 +438,7 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
             }
 
             Object x = fimag.find3(t);
-        /////////////////////////////////////////ESPACIO PARA AGRAGAR AL FICHERO DE NOMBRE DE IMAGENES//////////// para que no se repita
+            /////////////////////////////////////////ESPACIO PARA AGRAGAR AL FICHERO DE NOMBRE DE IMAGENES//////////// para que no se repita
 
             if ((int) x == 60) {
                 fimag.add(t);
@@ -447,6 +452,7 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
 
             ////////////////////AHORA YA TENGO LA POSICION DONDE COLOCARE MIS IMAGENES
             lu.getNodo((int) users).getCategorias().getNodo((int) indexcategoria).getImagenes().add(n);
+          
 
             this.areaImagen.setIcon((ImageIcon) lu.getNodo((int) users).getCategorias().getNodo((int) indexcategoria).getImagenes().get(0));
         } catch (Exception e) {
@@ -459,7 +465,7 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
         DefaultTreeModel model = (DefaultTreeModel) categoria.getModel();
         model.removeNodeFromParent(selectedNode);
 
-       ////////////////AQUI SOLO LAS ELIMINO DEL PANEL PUES PUEDEN EXISTIR EN OTRAS CATEGORIAS DICHAS IMAGENES 
+        ////////////////AQUI SOLO LAS ELIMINO DEL PANEL PUES PUEDEN EXISTIR EN OTRAS CATEGORIAS DICHAS IMAGENES 
 
     }//GEN-LAST:event_jButton6ActionPerformed
 ///////////////////////////cargar categoria
@@ -510,7 +516,7 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
     }//GEN-LAST:event_jButton3ActionPerformed
 ////////////////MOUSE CLICKED
     private void categoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoriaMouseClicked
-    /////mostrar imagenes
+        /////mostrar imagenes
         // li find n=find
         TreeSelectionModel am = categoria.getSelectionModel();
         if (am.getSelectionCount() > 0) {
@@ -559,6 +565,34 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
      */
     public static void setUsers(Object aUsers) {
         users = aUsers;
+    }
+
+    /**
+     * @return the catConvertidor
+     */
+    public Object getCatConvertidor() {
+        return catConvertidor;
+    }
+
+    /**
+     * @param catConvertidor the catConvertidor to set
+     */
+    public void setCatConvertidor(Object catConvertidor) {
+        this.catConvertidor = catConvertidor;
+    }
+
+    /**
+     * @return the imagConvertidor
+     */
+    public Object getImagConvertidor() {
+        return imagConvertidor;
+    }
+
+    /**
+     * @param imagConvertidor the imagConvertidor to set
+     */
+    public void setImagConvertidor(Object imagConvertidor) {
+        this.imagConvertidor = imagConvertidor;
     }
 
 

@@ -6,6 +6,7 @@ public class Menu extends javax.swing.JFrame {
 ListUsuario lu=new ListUsuario();
 Biblioteca b=new Biblioteca();
 Editor edi= new Editor();
+Convertidor con= new Convertidor();
     
     public Menu() {
         initComponents();
@@ -74,6 +75,11 @@ Editor edi= new Editor();
         });
 
         jButton3.setText("Ingresar a Convertidor");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,18 +148,20 @@ Editor edi= new Editor();
     
     b.setTitle("Biblioteca");
     b.usuariob(usuario.getText());
+    con.agregarUsuarios(usuario.getText());
     b.setVisible(true);
-    
-   
-    
-       
-      
+          
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         edi.setTitle("Editor");
         edi.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        con.setTitle("Convertidor");
+        con.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
