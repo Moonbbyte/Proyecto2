@@ -59,6 +59,7 @@ public class JpegImageHandlerBn extends ImageHandler {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {
             img = ImageIO.read(Originalimage);
+            
            
             for (int i = 0; i < img.getHeight(); i++) {
                 for (int j = 0; j < img.getWidth(); j++) {
