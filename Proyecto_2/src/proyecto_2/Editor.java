@@ -18,7 +18,6 @@ public class Editor extends javax.swing.JFrame {
     static byte[] bytesimag;
     JpgToBmpImage Jtb = new JpgToBmpImage("x");
     BmptoJpegImage Btj = new BmptoJpegImage("x");
-    
 
     public Editor() {
         initComponents();
@@ -42,6 +41,8 @@ public class Editor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -63,6 +64,11 @@ public class Editor extends javax.swing.JFrame {
         });
 
         jButton4.setText("ROJO VERDE AZUL SEPIA");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("MODIFICAR IMAGEN");
 
@@ -76,6 +82,9 @@ public class Editor extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        ima.setBackground(new java.awt.Color(102, 255, 255));
+        ima.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -97,7 +106,7 @@ public class Editor extends javax.swing.JFrame {
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                         .addComponent(ima, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15))
         );
@@ -133,9 +142,7 @@ public class Editor extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,8 +184,6 @@ public class Editor extends javax.swing.JFrame {
             }
 
         }
-
-
     }//GEN-LAST:event_jButton2ActionPerformed
 ////////////////////////CONVERTIR IMAGEN
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -202,30 +207,44 @@ public class Editor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 /////////////////////////////COPIAR IMAGEN JPG
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       this.str = archivo.getName();
+        this.str = archivo.getName();
         try {
-           ///////////////PRIMER PASO CONVERTIR A BMP UNA IMAGEN JPG
-            
+            ///////////////PRIMER PASO CONVERTIR A BMP UNA IMAGEN JPG
+
             if (str.endsWith("jpg")) {
                 System.out.println(str);
                 this.ima.setIcon(new ImageIcon(bytesimag));
                 Jtb.setNombre(this.str.substring(0, str.length() - 4));
                 Jtb.generateFiles();
                 ////////////////////////////////////SEGUNDO PASO REALIZAR UNA COPIA DE UN BMP
-               BmpHandlerCopy Bcopy= new BmpHandlerCopy(str.substring(0,str.length()-4));
-               Bcopy.readFile();
-               Bcopy.generateFiles();
+                BmpHandlerCopy Bcopy = new BmpHandlerCopy(str.substring(0, str.length() - 4));
+                Bcopy.readFile();
+                Bcopy.generateFiles();
                 /////////////////////////////TERCER PASO CONVERTIR LA COPIA DE BMP A JPG
-                JpegImageCopy Jcopy= new JpegImageCopy(str.substring(0,str.length()-4));
+                JpegImageCopy Jcopy = new JpegImageCopy(str.substring(0, str.length() - 4));
                 Jcopy.readFile();
                 Jcopy.generateFiles();
-                
-            } 
-            
-            
+
+            }
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+/////////////////////////ROJO, VERDE, AZUL Y SEPIA
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       
+       this.str=archivo.getName();
+        try {
+            ///////////PRIMER PASO CONVERTIR A BMP EL ARCHIVO 
+        JpegImageHandlerColors Jc= new JpegImageHandlerColors(str.substring(0, str.length()-4));   
+        Jc.readFile();
+        Jc.generateFiles();
+            
+        } catch (Exception e) {
+        }
+
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
