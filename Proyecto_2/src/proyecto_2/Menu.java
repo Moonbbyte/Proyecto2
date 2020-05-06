@@ -148,7 +148,6 @@ Convertidor con= new Convertidor();
     
     b.setTitle("Biblioteca");
     b.usuariob(usuario.getText());
-    con.agregarUsuarios(usuario.getText());
     b.setVisible(true);
           
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -161,6 +160,7 @@ Convertidor con= new Convertidor();
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         con.setTitle("Convertidor");
         con.setVisible(true);
+       
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

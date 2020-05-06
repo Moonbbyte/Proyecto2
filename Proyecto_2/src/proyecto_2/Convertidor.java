@@ -10,15 +10,19 @@ package proyecto_2;
  * @author Brandon
  */
 public class Convertidor extends javax.swing.JFrame {
-ListUsuario lu= new ListUsuario();
-    
+
+    ListUsuario lu = new ListUsuario();
+    private static Object categoria;
+    private static Object nombreImag;
+    private static Object nombre;
+
+
     public Convertidor() {
         initComponents();
         this.setLocationRelativeTo(null);
 
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,6 +44,7 @@ ListUsuario lu= new ListUsuario();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         consola = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +73,11 @@ ListUsuario lu= new ListUsuario();
         });
 
         jButton1.setText("Encender");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Agregar Imagen");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -172,19 +182,20 @@ ListUsuario lu= new ListUsuario();
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)
+                                .addGap(144, 144, 144))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jLabel2)
-                                    .addComponent(consola, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addGap(144, 144, 144)))))
+                                    .addComponent(consola, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -214,7 +225,9 @@ ListUsuario lu= new ListUsuario();
                     .addComponent(jButton5)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -253,23 +266,18 @@ ListUsuario lu= new ListUsuario();
     private void categoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_categoriasActionPerformed
-public void agregarUsuarios(String usuario){
-lu.add(usuario);
-}
-
-public void agregarCategorias(String cat, int x){
-lu.getNodo(x).getCategorias().add(cat);
-}
-
-public void agregarImagenes(int cat,int imag,Object imagen){
-lu.getNodo(1).getCategorias().getNodo(1).getImagenes().add(imagen);
-}
+   public void agregarUsuarios(){
+   int x= (int)lu.find2(getNombre());
+   if(x==60){
+   lu.add(getNombre());
+   }
+   }
     
     
     
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JpgToBmpImage cargar = new JpgToBmpImage("x");
+      /*  JpgToBmpImage cargar = new JpgToBmpImage("x");
 
         if (seleccionado.showDialog(this, "Abrir archivo") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
@@ -299,96 +307,28 @@ lu.getNodo(1).getCategorias().getNodo(1).getImagenes().add(imagen);
 
             }
 
-        }
+        }*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.str = archivo.getName();
-        try {
-            if (str.endsWith("jpg")) {
-                System.out.println(str);
-
-                Jtb.setNombre(this.str.substring(0, str.length() - 4));
-                Jtb.generateFiles();
-            } else if (str.endsWith("bmp")) {
-                System.out.println(str);
-
-                Btj.setNombre(this.str.substring(0, str.length() - 4));
-                Btj.generateFiles();
-            }
-        } catch (Exception e) {
-
-        }
+     
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        this.str = archivo.getName();
-        try {
-            ///////////////PRIMER PASO CONVERTIR A BMP UNA IMAGEN JPG
-
-            if (str.endsWith("jpg")) {
-                System.out.println(str);
-
-                Jtb.setNombre(this.str.substring(0, str.length() - 4));
-                Jtb.generateFiles();
-                ////////////////////////////////////SEGUNDO PASO REALIZAR UNA COPIA DE UN BMP
-                BmpHandlerCopy Bcopy = new BmpHandlerCopy(str.substring(0, str.length() - 4));
-                Bcopy.readFile();
-                Bcopy.generateFiles();
-                /////////////////////////////TERCER PASO CONVERTIR LA COPIA DE BMP A JPG
-                JpegImageCopy Jcopy = new JpegImageCopy(str.substring(0, str.length() - 4));
-                Jcopy.readFile();
-                Jcopy.generateFiles();
-
-            }
-
-        } catch (Exception e) {
-        }
+       
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        this.str=archivo.getName();
-        try {
-            ///////////PRIMER PASO CONVERTIR A BMP EL ARCHIVO
-            JpegImageHandlerColors Jc= new JpegImageHandlerColors(str.substring(0, str.length()-4));
-            Jc.readFile();
-            Jc.generateFiles();
-            ////////////////////////SEPIA
-            Jc.sepia();
-            Jc.green();
-            Jc.red();
-            Jc.blue();
-            Jc.pasarBmpajpg();
-        } catch (Exception e) {
-        }
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        this.str=archivo.getName();
-        try{
-            JpegImageHandlerRotator Jr = new  JpegImageHandlerRotator(str.substring(0, str.length()-4));
-            Jr.readFile();
-            Jr.generateFiles();
-            Jr.rotarhorizontal();
-            Jr.rotarvertical();
-        }catch(Exception e){
-            System.out.println(e);}
+     
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        this.str=archivo.getName();
-        try {
-            ///////////PRIMER PASO CONVERTIR A BMP EL ARCHIVO
-            JpegImageHandlerBn Bn= new JpegImageHandlerBn(str.substring(0, str.length()-4));
-            Bn.readFile();
-            Bn.generateFiles();
-            ////////////////////////SEPIA
-            Bn.BN();
-            Bn.convertirjpg();
-        } catch (Exception e) {
-        }
+     
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -403,7 +343,71 @@ lu.getNodo(1).getCategorias().getNodo(1).getImagenes().add(imagen);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
-   
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         int indexusuario, indexcategoria;
+         System.out.println(getNombre());
+         System.out.println(getCategoria());
+         System.out.println(getNombreImag());
+         System.out.println("");
+         indexusuario=(int)(lu.find2(getNombre()));
+         if(indexusuario==60){
+         lu.add(getNombre());
+         }else{}
+         indexusuario=(int)(lu.find2(getNombre()));
+        indexcategoria=(int) lu.getNodo(indexusuario).getCategorias().find2(this.getCategoria());
+        if(indexcategoria==60){
+            lu.getNodo(indexusuario).getCategorias().add(this.getCategoria());
+        }else{}
+        indexcategoria= (int) lu.getNodo(indexusuario).getCategorias().find2(this.getCategoria());
+        lu.getNodo(indexusuario).getCategorias().getNodo(indexcategoria).getImagenes().add(getNombreImag());    
+        
+        
+        usuarios.addItem(lu.get(0).toString());
+        categorias.addItem(lu.getNodo(indexusuario).getCategorias().get(0).toString());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * @return the categoria
+     */
+    public static Object getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * @param aCategoria the categoria to set
+     */
+    public static void setCategoria(Object aCategoria) {
+        categoria = aCategoria;
+    }
+
+    /**
+     * @return the nombreImag
+     */
+    public static Object getNombreImag() {
+        return nombreImag;
+    }
+
+    /**
+     * @param aNombreImag the nombreImag to set
+     */
+    public static void setNombreImag(Object aNombreImag) {
+        nombreImag = aNombreImag;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public static Object getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param aNombre the nombre to set
+     */
+    public static void setNombre(Object aNombre) {
+        nombre = aNombre;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> categorias;
@@ -422,6 +426,7 @@ lu.getNodo(1).getCategorias().getNodo(1).getImagenes().add(imagen);
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JComboBox<String> usuarios;
     // End of variables declaration//GEN-END:variables
 }
