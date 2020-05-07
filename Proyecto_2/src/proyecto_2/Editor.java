@@ -268,6 +268,7 @@ public class Editor extends javax.swing.JFrame {
         Jr.generateFiles();
         Jr.rotarhorizontal();
         Jr.rotarvertical();
+        Jr.pasaraJpg();
         }catch(Exception e){
             System.out.println(e);}
     }//GEN-LAST:event_jButton5ActionPerformed

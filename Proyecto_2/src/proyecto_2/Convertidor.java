@@ -361,9 +361,14 @@ public class Convertidor extends javax.swing.JFrame {
         indexcategoria= (int) lu.getNodo(indexusuario).getCategorias().find2(this.getCategoria());
         lu.getNodo(indexusuario).getCategorias().getNodo(indexcategoria).getImagenes().add(getNombreImag());    
         
+        usuarios.removeAllItems();
+        categorias.removeAllItems();
         
         usuarios.addItem(lu.get(0).toString());
         categorias.addItem(lu.getNodo(indexusuario).getCategorias().get(0).toString());
+        
+        lu.imprimir();
+        System.out.println(lu.getSize());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
