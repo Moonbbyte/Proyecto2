@@ -1,6 +1,8 @@
 
 package proyecto_2;
 
+import javax.swing.JOptionPane;
+
 
 public class Menu extends javax.swing.JFrame {
 ListUsuario lu=new ListUsuario();
@@ -145,10 +147,14 @@ Convertidor con= new Convertidor();
     }//GEN-LAST:event_usuarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    
+if(usuario.getText().equals("")){
+JOptionPane.showMessageDialog(null,"Debe de ingresar el nombre de un usuario");
+}else{   
     b.setTitle("Biblioteca");
     b.usuariob(usuario.getText());
     b.setVisible(true);
+    JOptionPane.showMessageDialog(null, "Para agregar una categoria distinta al convertidor cambiar el combobox");
+}
           
     }//GEN-LAST:event_jButton1ActionPerformed
 

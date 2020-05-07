@@ -69,13 +69,17 @@ public class ListaDCircular extends EstructuraDeDatos implements Serializable {
 
          }
          else {
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size; i++) {
 
+            
            if (actual.getValor().equals(e)) {
                 break;    
             }
-             contador++;
-          
+           contador++;    
+           if(contador==size){
+            contador=60;
+            break;
+            }         
             actual =actual.getSiguiente();
         }}
 

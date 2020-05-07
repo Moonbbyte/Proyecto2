@@ -35,6 +35,7 @@ public class Biblioteca extends javax.swing.JFrame implements Serializable {
 
         initComponents();
         this.setLocationRelativeTo(null);
+       
 
     }
 

@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 
 public class JpgToBmpImage extends ImageHandler {
    private  String nombre="xD";
+   private static String tipo="";
     FileInputStream entrada;
     FileOutputStream salida;
    byte[] img;
@@ -50,6 +51,21 @@ public class JpgToBmpImage extends ImageHandler {
                         salida.close();
                   
     }
+    
+    public void cargarImagen() throws Exception{
+                    
+    
+    
+    }
+    
+    public void crearImagen() throws Exception{
+    
+    
+    }
+    
+    
+    
+    
 
     public File getArchivo() {
         return archivo;
@@ -71,6 +87,20 @@ public class JpgToBmpImage extends ImageHandler {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public static String getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param aTipo the tipo to set
+     */
+    public static void setTipo(String aTipo) {
+        tipo = aTipo;
     }
 
 }
