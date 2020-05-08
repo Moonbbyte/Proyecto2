@@ -25,7 +25,15 @@ public class JpegImageHandlerBn extends ImageHandler {
     public JpegImageHandlerBn(String filename) {
         super(filename);
     }
-
+    public void Todoslosmetodos(){
+     try{
+        readFile();
+        generateFiles();
+        BN();
+        convertirjpg();
+        }catch(Exception e){e.printStackTrace();}
+    
+    }
     @Override
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.handledFileName + ".jpg");
@@ -33,7 +41,7 @@ public class JpegImageHandlerBn extends ImageHandler {
         input.read(filebytes);
         input.close();
         System.out.println("Imagen leida: " + this.handledFileName);
-          }
+    }
 
     @Override
     public void generateFiles() throws Exception {

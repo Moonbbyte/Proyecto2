@@ -56,7 +56,7 @@ public class Convertidor extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         tipoImag = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -265,17 +265,6 @@ public class Convertidor extends javax.swing.JFrame {
                     .addComponent(jToggleButton1))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(tipoImag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton8)
@@ -286,18 +275,27 @@ public class Convertidor extends javax.swing.JFrame {
                             .addComponent(imagenes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton7)
-                        .addGap(53, 53, 53))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(30, 30, 30)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(tipoImag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addComponent(consola, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -613,33 +611,271 @@ public class Convertidor extends javax.swing.JFrame {
             for (int i = 0; i < numeroimagenes; i++) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
                 hc[i] = new HilosColores(nombreImagen);
-                hc[i].run();
-                hc[i].start();
             }
+            switch (numeroimagenes) {
+                case 1:
+                    hc[0].run();
+                    hc[0].start();
+                    break;
+                case 2:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    break;
+                case 3:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    hc[2].run();
+                    hc[2].start();
 
+                    break;
+                case 4:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    hc[2].run();
+                    hc[2].start();
+                    hc[3].run();
+                    hc[3].start();
+                    break;
+                case 5:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    hc[2].run();
+                    hc[2].start();
+                    hc[3].run();
+                    hc[3].start();
+                    hc[4].run();
+                    hc[4].start();
+                    break;
+
+                case 6:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    hc[2].run();
+                    hc[2].start();
+                    hc[3].run();
+                    hc[3].start();
+                    hc[4].run();
+                    hc[4].start();
+                    hc[5].run();
+                    hc[5].start();
+                    break;
+                case 7:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[0].run();
+                    hc[1].start();
+                    hc[0].run();
+                    hc[2].start();
+                    hc[0].run();
+                    hc[3].start();
+                    hc[0].run();
+                    hc[4].start();
+                    hc[0].run();
+                    hc[5].start();
+                    hc[0].run();
+                    hc[6].start();
+                    hc[0].run();
+                    hc[7].start();
+                case 8:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    hc[2].run();
+                    hc[2].start();
+                    hc[3].run();
+                    hc[3].start();
+                    hc[4].run();
+                    hc[4].start();
+                    hc[5].run();
+                    hc[5].start();
+                    hc[6].run();
+                    hc[6].start();
+                    hc[7].run();
+                    hc[7].start();
+                    hc[8].run();
+                    hc[8].start();
+                    break;
+            }
         } else if (secuencia == 3) {
-             for (int i = 0; i < numeroimagenes; i++) {
+            for (int i = 0; i < numeroimagenes; i++) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
                 Hi[i] = new JpegImageHandlerColors(nombreImagen);
                 Hi[i].Todoslosmetodos();
             }
-            
+
         } else if (secuencia == 2) {
-             for (int i = numeroimagenes; i > 0; i--) {
+            for (int i = numeroimagenes; i > 0; i--) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i - 1).toString();
                 Hi[i - 1] = new JpegImageHandlerColors(nombreImagen);
-                Hi[i-1].Todoslosmetodos();
+                Hi[i - 1].Todoslosmetodos();
             }
         }
 
     }//GEN-LAST:event_jButton5ActionPerformed
-
+//////////////////////ROTATOR
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
+        String nombreImagen;
+        HilosRotator hc[] = new HilosRotator[numeroimagenes];
+        JpegImageHandlerRotator Hi[] = new JpegImageHandlerRotator[numeroimagenes];
+        if (secuencia == 0) {
+            JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
+        } else if (secuencia == 1) {
+            for (int i = 0; i < numeroimagenes; i++) {
+                nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
+                hc[i] = new HilosRotator(nombreImagen);
+            }
+            switch (numeroimagenes) {
+                case 1:
+                    hc[0].run();
+                    hc[0].start();
+                    break;
+                case 2:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    break;
+                case 3:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    hc[2].run();
+                    hc[2].start();
+
+                    break;
+                case 4:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    hc[2].run();
+                    hc[2].start();
+                    hc[3].run();
+                    hc[3].start();
+                    break;
+                case 5:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    hc[2].run();
+                    hc[2].start();
+                    hc[3].run();
+                    hc[3].start();
+                    hc[4].run();
+                    hc[4].start();
+                    break;
+
+                case 6:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    hc[2].run();
+                    hc[2].start();
+                    hc[3].run();
+                    hc[3].start();
+                    hc[4].run();
+                    hc[4].start();
+                    hc[5].run();
+                    hc[5].start();
+                    break;
+                case 7:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[0].run();
+                    hc[1].start();
+                    hc[0].run();
+                    hc[2].start();
+                    hc[0].run();
+                    hc[3].start();
+                    hc[0].run();
+                    hc[4].start();
+                    hc[0].run();
+                    hc[5].start();
+                    hc[0].run();
+                    hc[6].start();
+                    hc[0].run();
+                    hc[7].start();
+                case 8:
+                    hc[0].run();
+                    hc[0].start();
+                    hc[1].run();
+                    hc[1].start();
+                    hc[2].run();
+                    hc[2].start();
+                    hc[3].run();
+                    hc[3].start();
+                    hc[4].run();
+                    hc[4].start();
+                    hc[5].run();
+                    hc[5].start();
+                    hc[6].run();
+                    hc[6].start();
+                    hc[7].run();
+                    hc[7].start();
+                    hc[8].run();
+                    hc[8].start();
+                    break;
+            }
+        } else if (secuencia == 3) {
+            for (int i = 0; i < numeroimagenes; i++) {
+                nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
+                Hi[i] = new JpegImageHandlerRotator(nombreImagen);
+                Hi[i].Todoslosmetodos();
+            }
+
+        } else if (secuencia == 2) {
+            for (int i = numeroimagenes; i > 0; i--) {
+                nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i - 1).toString();
+                Hi[i - 1] = new JpegImageHandlerRotator(nombreImagen);
+                Hi[i - 1].Todoslosmetodos();
+            }
+        }
+
 
     }//GEN-LAST:event_jButton6ActionPerformed
-
+/////////////////////BLANCO Y NEGRO
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
+        String nombreImagen;
+        HilosBn hc[] = new HilosBn[numeroimagenes];
+        JpegImageHandlerBn Hi[] = new JpegImageHandlerBn[numeroimagenes];
+        if (secuencia == 0) {
+            JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
+        } else if (secuencia == 1) {
+            for (int i = 0; i < numeroimagenes; i++) {
+                nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
+                hc[i] = new HilosBn(nombreImagen);
+                hc[i].run();
+                hc[i].start();
+            }} else if (secuencia == 3) {
+            for (int i = 0; i < numeroimagenes; i++) {
+                nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
+                Hi[i] = new JpegImageHandlerBn(nombreImagen);
+                Hi[i].Todoslosmetodos();
+            }
 
+        } else if (secuencia == 2) {
+            for (int i = numeroimagenes; i > 0; i--) {
+                nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i - 1).toString();
+                Hi[i - 1] = new JpegImageHandlerBn(nombreImagen);
+                Hi[i - 1].Todoslosmetodos();
+            }
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 //////////////////////EN PARARELO
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed

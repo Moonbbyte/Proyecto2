@@ -6,72 +6,67 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import javax.imageio.ImageIO;
 
-public class JpegImageHandlerRotator extends ImageHandler {
-
-    File Originalimage;
+public class HilosRotator extends Thread {
+ File Originalimage;
     BufferedImage img = null;
     byte[] filebytes;
     FileOutputStream salida;
+    String nombre;
 
-    public JpegImageHandlerRotator(String filename) {
-        super(filename);
+    public HilosRotator(String nombre) {
+        this.nombre = nombre;
     }
-    
-    public void Todoslosmetodos(){
-     try{
+    @Override
+    public void run() {
+        try{
         readFile();
         generateFiles();
         rotarvertical();
         rotarhorizontal();
         pasaraJpg();
-        
         }catch(Exception e){e.printStackTrace();}
     }
-
-    @Override
     public void readFile() throws Exception {
-        FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.handledFileName + ".jpg");
+        FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.nombre + ".jpg");
         filebytes = new byte[input.available()];
         input.read(filebytes);
         input.close();
-        System.out.println("Imagen leida: " + this.handledFileName);
+        System.out.println("Imagen leida: " + this.nombre);
     }
-
-    @Override
-    public void generateFiles() throws Exception {
-        salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
+     public void generateFiles() throws Exception {
+        salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre+ ".bmp");
         salida.write(filebytes);
         salida.close();
-        System.out.println("Imagen generada: " + this.handledFileName);
+        System.out.println("Imagen generada: " + this.nombre);
 
     }
-
+    
     public void pasaraJpg() throws Exception {
-        String name="Hrotation-"+this.handledFileName;
+        String name="Hrotation-"+this.nombre;
 
         for (int i = 0; i < 2; i++) {
             if (i == 0) {
-                name = "Vrotation-" + this.handledFileName;
+                name = "Vrotation-" + this.nombre;
             } else if (i == 1) {
-                name = "Hrotation-" + this.handledFileName;
+                name = "Hrotation-" + this.nombre;
             }
             FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + name + ".bmp");
             filebytes = new byte[input.available()];
             input.read(filebytes);
             input.close();
-            System.out.println("Imagen leida: " + this.handledFileName);
+            System.out.println("Imagen leida: " + this.nombre);
 
             salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + name+ ".jpg");
             salida.write(filebytes);
             salida.close();
-            System.out.println("Imagen generada: " + this.handledFileName);
+            System.out.println("Imagen generada: " + this.nombre);
 
         }
 
     }
 
     public void rotarvertical() {
-        this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
+        this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         try {
             img = ImageIO.read(Originalimage);
             BufferedImage rot = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -83,7 +78,7 @@ public class JpegImageHandlerRotator extends ImageHandler {
                 }
 
             }
-            File Image = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\Vrotation-" + this.handledFileName + ".bmp");
+            File Image = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\Vrotation-" + this.nombre + ".bmp");
             ImageIO.write(rot, "BMP", Image);
         } catch (Exception e) {
         }
@@ -91,7 +86,7 @@ public class JpegImageHandlerRotator extends ImageHandler {
     }
 
     public void rotarhorizontal() {
-        this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
+        this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre+ ".bmp");
         try {
             img = ImageIO.read(Originalimage);
             BufferedImage rot = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -103,12 +98,12 @@ public class JpegImageHandlerRotator extends ImageHandler {
                 }
 
             }
-            File Image = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\Hrotation-" + this.handledFileName + ".bmp");
+            File Image = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\Hrotation-" + this.nombre + ".bmp");
             ImageIO.write(rot, "BMP", Image);
 
         } catch (Exception e) {
         }
 
     }
-
+    
 }
