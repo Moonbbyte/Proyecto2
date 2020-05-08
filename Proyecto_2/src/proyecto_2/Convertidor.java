@@ -470,9 +470,135 @@ public class Convertidor extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton3ActionPerformed
-
+//////////////////////COPIA JPG
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
+    String nombreImagen;
+    HilosCopia hc[]= new HilosCopia[numeroimagenes];
+    
+    if (secuencia == 0) {
+            JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
+        }else if(secuencia==1){
+        for(int i=0;i<numeroimagenes;i++){
+         nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
+                hc[i] = new HilosCopia(nombreImagen);
+        }
+        switch (numeroimagenes) {
+                case 1:
+                     hc[0].run();
+                     hc[0].start();
+                    break;
+                case 2:
+                     hc[0].run();
+                     hc[0].start();
+                     hc[1].run();
+                     hc[1].start();
+                    break;
+                case 3:
+                     hc[0].run();
+                     hc[0].start();
+                     hc[1].run();
+                     hc[1].start();
+                     hc[2].run();
+                     hc[2].start();
 
+                    break;
+                case 4:
+                     hc[0].run();
+                     hc[0].start();
+                     hc[1].run();
+                     hc[1].start();
+                     hc[2].run();
+                     hc[2].start();
+                     hc[3].run();
+                     hc[3].start();
+                    break;
+                case 5:
+                     hc[0].run();
+                     hc[0].start();
+                     hc[1].run();
+                     hc[1].start();
+                     hc[2].run();
+                     hc[2].start();
+                     hc[3].run();
+                     hc[3].start();
+                     hc[4].run();
+                     hc[4].start();
+                    break;
+
+                case 6:
+                     hc[0].run();
+                    hc[0].start();
+                     hc[1].run();
+                     hc[1].start();
+                     hc[2].run();
+                     hc[2].start();
+                     hc[3].run();
+                     hc[3].start();
+                     hc[4].run();
+                     hc[4].start();
+                     hc[5].run();
+                     hc[5].start();
+                    break;
+                case 7:
+                     hc[0].run();
+                     hc[0].start();
+                     hc[0].run();
+                     hc[1].start();
+                     hc[0].run();
+                     hc[2].start();
+                     hc[0].run();
+                     hc[3].start();
+                     hc[0].run();
+                     hc[4].start();
+                     hc[0].run();
+                     hc[5].start();
+                     hc[0].run();
+                     hc[6].start();
+                     hc[0].run();
+                     hc[7].start();
+                case 8:
+                     hc[0].run();
+                     hc[0].start();
+                     hc[1].run();
+                     hc[1].start();
+                     hc[2].run();
+                     hc[2].start();
+                     hc[3].run();
+                     hc[3].start();
+                     hc[4].run();
+                     hc[4].start();
+                     hc[5].run();
+                     hc[5].start();
+                     hc[6].run();
+                     hc[6].start();
+                     hc[7].run();
+                     hc[7].start();
+                     hc[8].run();
+                     hc[8].start();
+                    break;}
+        
+        } else if (secuencia == 2) {
+            for (int i = numeroimagenes; i > 0; i--) {
+                nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i-1).toString();
+                hc[i-1] = new HilosCopia(nombreImagen);
+                hc[i-1].run();
+                hc[i-1].start();
+            }
+            /////////////////AGREGAR AL ARCHIVO SECUENCIA LIFO
+           ///////////////imprimir fILE archivo en la consola  
+///////////////////////////FIFO
+        }else if (secuencia ==3){
+          for (int i = 0; i <numeroimagenes; i++) {
+                nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
+                hc[i] = new HilosCopia(nombreImagen);
+                hc[i].run();
+                hc[i].start();
+            }
+         ///////////////imprimir fILE archivo en la consola
+        }
+    
+    
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
