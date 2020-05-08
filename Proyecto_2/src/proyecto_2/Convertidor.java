@@ -5,6 +5,8 @@
  */
 package proyecto_2;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Brandon
@@ -15,10 +17,10 @@ public class Convertidor extends javax.swing.JFrame {
     private static Object categoria;
     private static Object nombreImag;
     private static Object nombre;
-    
-    
-    
-    
+    static int numerousuario;
+    static int numerocategoria;
+    static int numeroimagenes;
+    static int secuencia = 0;
 
     public Convertidor() {
         initComponents();
@@ -332,8 +334,140 @@ public class Convertidor extends javax.swing.JFrame {
         }
     }
 
-
+//////////////////////////////////CAMBIAR TIPOS
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
+        HilosFormato Hf[] = new HilosFormato[numeroimagenes];
+        String nombreImagen;
+        String tipo = tipoImag.getSelectedItem().toString();
+
+        if (secuencia == 0) {
+            JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
+        } else if (secuencia == 1) {
+            for (int i = 0; i < numeroimagenes; i++) {
+                nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
+                Hf[i] = new HilosFormato(nombreImagen, tipo);
+            }
+
+            switch (numeroimagenes) {
+                case 1:
+                    Hf[0].run();
+                    Hf[0].start();
+                    break;
+                case 2:
+                    Hf[0].run();
+                    Hf[0].start();
+                    Hf[1].run();
+                    Hf[1].start();
+                    break;
+                case 3:
+                    Hf[0].run();
+                    Hf[0].start();
+                    Hf[1].run();
+                    Hf[1].start();
+                    Hf[2].run();
+                    Hf[2].start();
+
+                    break;
+                case 4:
+                    Hf[0].run();
+                    Hf[0].start();
+                    Hf[1].run();
+                    Hf[1].start();
+                    Hf[2].run();
+                    Hf[2].start();
+                    Hf[3].run();
+                    Hf[3].start();
+                    break;
+                case 5:
+                    Hf[0].run();
+                    Hf[0].start();
+                    Hf[1].run();
+                    Hf[1].start();
+                    Hf[2].run();
+                    Hf[2].start();
+                    Hf[3].run();
+                    Hf[3].start();
+                    Hf[4].run();
+                    Hf[4].start();
+                    break;
+
+                case 6:
+                    Hf[0].run();
+                    Hf[0].start();
+                    Hf[1].run();
+                    Hf[1].start();
+                    Hf[2].run();
+                    Hf[2].start();
+                    Hf[3].run();
+                    Hf[3].start();
+                    Hf[4].run();
+                    Hf[4].start();
+                    Hf[5].run();
+                    Hf[5].start();
+                    break;
+                case 7:
+                    Hf[0].run();
+                    Hf[0].start();
+                    Hf[0].run();
+                    Hf[1].start();
+                    Hf[0].run();
+                    Hf[2].start();
+                    Hf[0].run();
+                    Hf[3].start();
+                    Hf[0].run();
+                    Hf[4].start();
+                    Hf[0].run();
+                    Hf[5].start();
+                    Hf[0].run();
+                    Hf[6].start();
+                    Hf[0].run();
+                    Hf[7].start();
+                case 8:
+                    Hf[0].run();
+                    Hf[0].start();
+                    Hf[1].run();
+                    Hf[1].start();
+                    Hf[2].run();
+                    Hf[2].start();
+                    Hf[3].run();
+                    Hf[3].start();
+                    Hf[4].run();
+                    Hf[4].start();
+                    Hf[5].run();
+                    Hf[5].start();
+                    Hf[6].run();
+                    Hf[6].start();
+                    Hf[7].run();
+                    Hf[7].start();
+                    Hf[8].run();
+                    Hf[8].start();
+                    break;
+///////////////////////AGREGAR AL ARCHIVO SECUENCIA HILO
+                ///////////////imprimir fILE archivo en la consola
+            }
+
+            ////////////LIFO
+        } else if (secuencia == 2) {
+            for (int i = numeroimagenes; i > 0; i--) {
+                nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i-1).toString();
+                Hf[i-1] = new HilosFormato(nombreImagen, tipo);
+                Hf[i-1].run();
+                Hf[i-1].start();
+            }
+            /////////////////AGREGAR AL ARCHIVO SECUENCIA LIFO
+           ///////////////imprimir fILE archivo en la consola  
+///////////////////////////FIFO
+        }else if (secuencia ==3){
+          for (int i = 0; i <numeroimagenes; i++) {
+                nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
+                Hf[i] = new HilosFormato(nombreImagen, tipo);
+                Hf[i].run();
+                Hf[i].start();
+            }
+         ///////////////imprimir fILE archivo en la consola
+        }
+
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -353,22 +487,22 @@ public class Convertidor extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
 
     }//GEN-LAST:event_jButton7ActionPerformed
-
+//////////////////////EN PARARELO
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        secuencia = 1;
     }//GEN-LAST:event_jButton8ActionPerformed
-
+////////////////////FIFO
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        secuencia = 3;
     }//GEN-LAST:event_jButton9ActionPerformed
-
+//////////////////////LIFO
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+        secuencia = 2;
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int indexusuario, indexcategoria, indeximagenes;
-       
+
         //HAY DOS VECES INDEX DE USUARIO IMAGENES Y CATEGORIAS POR QUE AL AGREGAR ESTOS EL INDEX DEBE DE ACTUALIZARSE
 //////AGREGACION DE USUARIO
         indexusuario = (int) (lu.find2(getNombre()));
@@ -378,79 +512,75 @@ public class Convertidor extends javax.swing.JFrame {
         }
         ///////////////AGREGACION DE CATEGORIAS
         indexusuario = (int) (lu.find2(getNombre()));
+        numerousuario = indexusuario;
+        /////////////////////
         indexcategoria = (int) lu.getNodo(indexusuario).getCategorias().find2(this.getCategoria());
         if (indexcategoria == 60) {
             lu.getNodo(indexusuario).getCategorias().add(this.getCategoria());
         } else {
         }
         indexcategoria = (int) lu.getNodo(indexusuario).getCategorias().find2(this.getCategoria());
+        numerocategoria = indexcategoria;
         ////////////////AGREGACION DE IMAGENES
-        indeximagenes=(int)lu.getNodo(indexusuario).getCategorias().getNodo(indexcategoria).getImagenes().find2(getNombreImag());
+        indeximagenes = (int) lu.getNodo(indexusuario).getCategorias().getNodo(indexcategoria).getImagenes().find2(getNombreImag());
         if (indeximagenes == 60) {
-         lu.getNodo(indexusuario).getCategorias().getNodo(indexcategoria).getImagenes().add(getNombreImag());
+            lu.getNodo(indexusuario).getCategorias().getNodo(indexcategoria).getImagenes().add(getNombreImag());
         } else {
         }
-        
-                   
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-       usuarios.removeAllItems();
-       
+        usuarios.removeAllItems();
 
-        for(int i=0; i<lu.getSize();i++){
-       usuarios.addItem(lu.get(i).toString());
-       }
-       
+        for (int i = 0; i < lu.getSize(); i++) {
+            usuarios.addItem(lu.get(i).toString());
+        }
+
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         categorias.removeAllItems();
-        String usuario=usuarios.getSelectedItem().toString(); 
-        int indexusuario=(int)lu.find2(usuario);
-        for(int i=0;i<lu.getNodo(indexusuario).getCategorias().getSize();i++){
-        categorias.addItem(lu.getNodo(indexusuario).getCategorias().get(i).toString());
-        
+        String usuario = usuarios.getSelectedItem().toString();
+        int indexusuario = (int) lu.find2(usuario);
+        for (int i = 0; i < lu.getNodo(indexusuario).getCategorias().getSize(); i++) {
+            categorias.addItem(lu.getNodo(indexusuario).getCategorias().get(i).toString());
+
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 /////////////////cargar al convertidor
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-      imagenes.removeAllItems();
-        String usuario=usuarios.getSelectedItem().toString(); 
-        String categoria=categorias.getSelectedItem().toString();
-        int indexusuario=(int)lu.find2(usuario);
-        int indexcategoria=(int)lu.getNodo(indexusuario).getCategorias().find2(categoria);
-        for(int i=0;i<lu.getNodo(indexusuario).getCategorias().getNodo(indexcategoria).getImagenes().getSize();i++){
-       imagenes.addItem(lu.getNodo(indexusuario).getCategorias().getNodo(indexcategoria).getImagenes().get(i).toString());    
+        imagenes.removeAllItems();
+        String usuario = usuarios.getSelectedItem().toString();
+        String categoria = categorias.getSelectedItem().toString();
+        int indexusuario = (int) lu.find2(usuario);
+        int indexcategoria = (int) lu.getNodo(indexusuario).getCategorias().find2(categoria);
+        for (int i = 0; i < lu.getNodo(indexusuario).getCategorias().getNodo(indexcategoria).getImagenes().getSize(); i++) {
+            imagenes.addItem(lu.getNodo(indexusuario).getCategorias().getNodo(indexcategoria).getImagenes().get(i).toString());
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-    
     public static Object getCategoria() {
         return categoria;
     }
 
-    
     public static void setCategoria(Object aCategoria) {
         categoria = aCategoria;
     }
 
-    
     public static Object getNombreImag() {
         return nombreImag;
     }
 
-    
     public static void setNombreImag(Object aNombreImag) {
         nombreImag = aNombreImag;
     }
 
-   
     public static Object getNombre() {
         return nombre;
     }
 
-  
     public static void setNombre(Object aNombre) {
         nombre = aNombre;
     }
