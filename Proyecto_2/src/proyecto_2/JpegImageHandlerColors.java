@@ -19,7 +19,20 @@ public class JpegImageHandlerColors extends ImageHandler {
         super(filename);
     }
 /////////////////////////////////////////////LEER UNA IMAGENA A JPG
-
+    public void Todoslosmetodos(){
+    try {
+            readFile();
+            generateFiles();
+            sepia();
+            red();
+            blue();
+            green();
+            pasarBmpajpg();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
+    }
     @Override
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.handledFileName + ".jpg");
