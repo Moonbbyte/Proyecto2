@@ -14,6 +14,9 @@ public class HilosBn extends Thread {
     byte[] filebytes;
     FileOutputStream salida;
     String nombre;
+    private int porcentaje = 0;
+    private int size;
+    private static int iteracion = 0;
 
     public HilosBn(String nombre) {
         this.nombre = nombre;
@@ -21,12 +24,14 @@ public class HilosBn extends Thread {
 
     @Override
     public void run() {
-        try{
-        readFile();
-        generateFiles();
-        BN();
-        convertirjpg();
-        }catch(Exception e){e.printStackTrace();}
+        try {
+            readFile();
+            generateFiles();
+            BN();
+            convertirjpg();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -39,7 +44,7 @@ public class HilosBn extends Thread {
     }
 
     public void generateFiles() throws Exception {
-        salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre+ ".bmp");
+        salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         salida.write(filebytes);
         salida.close();
         System.out.println("Imagen generada: " + this.nombre);
@@ -53,7 +58,9 @@ public class HilosBn extends Thread {
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\BN-" + this.nombre + ".jpg");
         salida.write(filebytes);
         salida.close();
-
+        iteracion++;
+        porcentaje = (int) ((iteracion / getSize()) * 100);
+        Convertidor.cargaproceso.setValue(porcentaje);
     }
 
     public void BN() {
@@ -85,6 +92,20 @@ public class HilosBn extends Thread {
 
             System.out.println(e);
         }
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
 
 }

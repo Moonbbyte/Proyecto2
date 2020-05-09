@@ -17,17 +17,22 @@ import javax.imageio.ImageIO;
  * @author Brandon
  */
 public class JpegImageHandlerColors1 extends ImageHandler {
-     File Originalimage;
+
+    File Originalimage;
     BufferedImage img = null;
     byte[] filebytes;
     FileOutputStream salida;
+    private int porcentaje = 0;
+    private int size;
+    private static int iteracion = 0;
 
     public JpegImageHandlerColors1(String filename) {
         super(filename);
     }
 /////////////////////////////////////////////LEER UNA IMAGENA A JPG
-    public void Todoslosmetodos(){
-    try {
+
+    public void Todoslosmetodos() {
+        try {
             readFile();
             generateFiles();
             sepia();
@@ -38,8 +43,9 @@ public class JpegImageHandlerColors1 extends ImageHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    
+
     }
+
     @Override
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.handledFileName + ".jpg");
@@ -72,13 +78,16 @@ public class JpegImageHandlerColors1 extends ImageHandler {
                 x = "green-";
             } else if (i == 3) {
                 x = "sepia-";
+                iteracion++;
+                porcentaje = (int) ((iteracion / getSize()) * 100);
+                Convertidor.cargaproceso.setValue(porcentaje);
             }
             FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + x + this.handledFileName + ".bmp");
             filebytes = new byte[input.available()];
             input.read(filebytes);
             input.close();
 
-            salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" +x+ this.handledFileName + ".jpg");
+            salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + x + this.handledFileName + ".jpg");
             salida.write(filebytes);
             salida.close();
 
@@ -218,5 +227,19 @@ public class JpegImageHandlerColors1 extends ImageHandler {
 
             System.out.println(e);
         }
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
 }

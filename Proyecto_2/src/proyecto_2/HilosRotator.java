@@ -12,6 +12,10 @@ public class HilosRotator extends Thread {
     byte[] filebytes;
     FileOutputStream salida;
     String nombre;
+    private int porcentaje = 0;
+    private int size;
+    private static int iteracion = 0;
+
 
     public HilosRotator(String nombre) {
         this.nombre = nombre;
@@ -49,6 +53,9 @@ public class HilosRotator extends Thread {
                 name = "Vrotation-" + this.nombre;
             } else if (i == 1) {
                 name = "Hrotation-" + this.nombre;
+                 iteracion++;
+                porcentaje = (int) ((iteracion / getSize()) * 100);
+                Convertidor.cargaproceso.setValue(porcentaje);
             }
             FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + name + ".bmp");
             filebytes = new byte[input.available()];
@@ -104,6 +111,20 @@ public class HilosRotator extends Thread {
         } catch (Exception e) {
         }
 
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
     
 }

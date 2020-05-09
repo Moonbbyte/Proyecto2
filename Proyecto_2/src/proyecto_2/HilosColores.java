@@ -14,7 +14,9 @@ public class HilosColores extends Thread {
     byte[] filebytes;
     FileOutputStream salida;
     String nombre;
-
+    private int porcentaje = 0;
+    private int size;
+    private static int iteracion = 0;
     public HilosColores(String nombre) {
         this.nombre = nombre;
     }
@@ -64,6 +66,9 @@ public class HilosColores extends Thread {
                 x = "green-";
             } else if (i == 3) {
                 x = "sepia-";
+                iteracion++;
+                porcentaje = (int) ((iteracion / getSize()) * 100);
+                Convertidor.cargaproceso.setValue(porcentaje);
             }
             FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + x + this.nombre + ".bmp");
             filebytes = new byte[input.available()];
@@ -209,6 +214,20 @@ public class HilosColores extends Thread {
 
             System.out.println(e);
         }
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
 
 }

@@ -16,24 +16,32 @@ import javax.imageio.ImageIO;
  *
  * @author Brandon
  */
-public class JpegImageHandlerBn1 extends ImageHandler{
+public class JpegImageHandlerBn1 extends ImageHandler {
+
     File Originalimage;
     BufferedImage img = null;
     byte[] filebytes;
     FileOutputStream salida;
-   
+    private int porcentaje = 0;
+    private int size;
+    private static int iteracion = 0;
+
     public JpegImageHandlerBn1(String filename) {
         super(filename);
     }
-    public void Todoslosmetodos(){
-     try{
-        readFile();
-        generateFiles();
-        BN();
-        convertirjpg();
-        }catch(Exception e){e.printStackTrace();}
-    
+
+    public void Todoslosmetodos() {
+        try {
+            readFile();
+            generateFiles();
+            BN();
+            convertirjpg();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
     @Override
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.handledFileName + ".jpg");
@@ -49,26 +57,27 @@ public class JpegImageHandlerBn1 extends ImageHandler{
         salida.write(filebytes);
         salida.close();
         System.out.println("Imagen generada: " + this.handledFileName);
-           }
+    }
+
     public void convertirjpg() throws Exception {
-    FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\BN-" + this.handledFileName + ".bmp");
+        FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\BN-" + this.handledFileName + ".bmp");
         filebytes = new byte[input.available()];
         input.read(filebytes);
         input.close();
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\BN-" + this.handledFileName + ".jpg");
         salida.write(filebytes);
         salida.close();
-    
+        iteracion++;
+        porcentaje = (int) ((iteracion / getSize()) * 100);
+        Convertidor.cargaproceso.setValue(porcentaje);
+
     }
-    
-    
-    
+
     public void BN() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {
             img = ImageIO.read(Originalimage);
-            
-           
+
             for (int i = 0; i < img.getHeight(); i++) {
                 for (int j = 0; j < img.getWidth(); j++) {
 
@@ -77,7 +86,7 @@ public class JpegImageHandlerBn1 extends ImageHandler{
                     int b = c.getBlue();
                     int g = c.getGreen();
                     int a = c.getAlpha();
-                    int gris= (int)((r+b+g)/3);
+                    int gris = (int) ((r + b + g) / 3);
 
                     Color scolor = new Color(gris, gris, gris, a);
                     img.setRGB(j, i, scolor.getRGB());
@@ -93,5 +102,19 @@ public class JpegImageHandlerBn1 extends ImageHandler{
 
             System.out.println(e);
         }
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
 }

@@ -16,24 +16,30 @@ import javax.imageio.ImageIO;
  * @author Brandon
  */
 public class JpegImageHandlerRotator1 extends ImageHandler {
+
     File Originalimage;
     BufferedImage img = null;
     byte[] filebytes;
     FileOutputStream salida;
+    private int porcentaje = 0;
+    private int size;
+    private static int iteracion = 0;
 
     public JpegImageHandlerRotator1(String filename) {
         super(filename);
     }
-    
-    public void Todoslosmetodos(){
-     try{
-        readFile();
-        generateFiles();
-        rotarvertical();
-        rotarhorizontal();
-        pasaraJpg();
-        
-        }catch(Exception e){e.printStackTrace();}
+
+    public void Todoslosmetodos() {
+        try {
+            readFile();
+            generateFiles();
+            rotarvertical();
+            rotarhorizontal();
+            pasaraJpg();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -55,13 +61,16 @@ public class JpegImageHandlerRotator1 extends ImageHandler {
     }
 
     public void pasaraJpg() throws Exception {
-        String name="Hrotation-"+this.handledFileName;
+        String name = "Hrotation-" + this.handledFileName;
 
         for (int i = 0; i < 2; i++) {
             if (i == 0) {
                 name = "Vrotation-" + this.handledFileName;
             } else if (i == 1) {
                 name = "Hrotation-" + this.handledFileName;
+                iteracion++;
+                porcentaje = (int) ((iteracion / getSize()) * 100);
+                Convertidor.cargaproceso.setValue(porcentaje);
             }
             FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + name + ".bmp");
             filebytes = new byte[input.available()];
@@ -69,7 +78,7 @@ public class JpegImageHandlerRotator1 extends ImageHandler {
             input.close();
             System.out.println("Imagen leida: " + this.handledFileName);
 
-            salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + name+ ".jpg");
+            salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + name + ".jpg");
             salida.write(filebytes);
             salida.close();
             System.out.println("Imagen generada: " + this.handledFileName);
@@ -117,5 +126,19 @@ public class JpegImageHandlerRotator1 extends ImageHandler {
         } catch (Exception e) {
         }
 
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
 }
