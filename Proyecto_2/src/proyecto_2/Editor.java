@@ -38,6 +38,8 @@ public class Editor extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(236, 322));
+        setMinimumSize(new java.awt.Dimension(234, 320));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
