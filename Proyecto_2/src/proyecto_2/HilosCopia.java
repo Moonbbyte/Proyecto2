@@ -13,34 +13,40 @@ import java.io.FileOutputStream;
  * @author Brandon
  */
 public class HilosCopia extends Thread {
- byte[] filebytes;
- String nombre;
- FileOutputStream salida; 
- 
- public HilosCopia(String name){
- this.nombre=name;
- }
-    
+
+    byte[] filebytes;
+    String nombre;
+    FileOutputStream salida;
+    private int porcentaje = 0;
+    private int size;
+    private static int iteracion = 0;
+
+    public HilosCopia(String name) {
+        this.nombre = name;
+    }
+
     @Override
-    public void run(){
-    try{
-      readFile();
-      generateFiles();
-      convertiraJpg();
-    
-    }catch(Exception e){}
-      
-    
-   ///////////////OBTENER JPG 
+    public void run() {
+        try {
+            readFile();
+            generateFiles();
+            convertiraJpg();
+
+        } catch (Exception e) {
+        }
+
+        ///////////////OBTENER JPG 
     }
+
     public void readFile() throws Exception {
-        FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\"+this.nombre+".jpg");
-                filebytes = new byte[input.available()];
-		input.read(filebytes);
-		input.close();
-		System.out.println("Imagen leida: " + this.nombre);
-    
+        FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.nombre + ".jpg");
+        filebytes = new byte[input.available()];
+        input.read(filebytes);
+        input.close();
+        System.out.println("Imagen leida: " + this.nombre);
+
     }
+
     ////////GENERAR A BMP
     public void generateFiles() throws Exception {
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\copia-" + this.nombre + ".bmp");
@@ -52,19 +58,35 @@ public class HilosCopia extends Thread {
         /*  File fichero= new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\copia-"+this.handledFileName+".bmp");         
                 fichero.delete();*/
     }
+
     ////////CONVERTIR IMAGEN GENERADA EN JPG
-    public void convertiraJpg() throws Exception{
-    FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\copia-"+this.nombre+".bmp");
-                filebytes = new byte[input.available()];
-		input.read(filebytes);
-		input.close();
-		System.out.println("Imagen leida: " + this.nombre);
+    public void convertiraJpg() throws Exception {
+        FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\copia-" + this.nombre + ".bmp");
+        filebytes = new byte[input.available()];
+        input.read(filebytes);
+        input.close();
+        System.out.println("Imagen leida: " + this.nombre);
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\copia-" + this.nombre + ".jpg");
         salida.write(filebytes);
         salida.close();
         System.out.println("Imagen generada: " + this.nombre);
-
+     iteracion++;
+     porcentaje=(int)((iteracion/size)*100);
+     Convertidor.cargaproceso.setValue(porcentaje);
     }
-    
-    
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
+    }
+
 }

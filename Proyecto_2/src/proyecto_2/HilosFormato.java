@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 public class HilosFormato extends Thread {
-
+    private int porcentaje=0;
+    private int size;
+    private static int iteracion=0;
     private  String nombre;
     private  String tipo;
     byte[] filebytes;
@@ -58,6 +60,9 @@ public class HilosFormato extends Thread {
        salida.write(filebytes);
        salida.close();
      }
+     iteracion++;
+     porcentaje=(int)((iteracion/size)*100);
+     Convertidor.cargaproceso.setValue(porcentaje);
     //////////////// IMPRIMIRIA EL ARCHIVO SI NO FUERA TAN COMPLICADO PASSAR LOS DATOS
     }
     
@@ -93,6 +98,24 @@ public class HilosFormato extends Thread {
      */
     public  void setTipo(String aTipo) {
         tipo = aTipo;
+    }
+
+    /**
+     * @return the numero
+     */
+ 
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
 
 }

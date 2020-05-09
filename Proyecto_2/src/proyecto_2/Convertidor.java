@@ -21,6 +21,7 @@ public class Convertidor extends javax.swing.JFrame {
     static int numerocategoria;
     static int numeroimagenes;
     static int secuencia = 0;
+     int porcentaje;
 
     public Convertidor() {
         initComponents();
@@ -163,6 +164,8 @@ public class Convertidor extends javax.swing.JFrame {
         consola.setForeground(new java.awt.Color(0, 0, 0));
         consola.setOpaque(true);
 
+        cargaproceso.setForeground(new java.awt.Color(153, 153, 255));
+
         jButton11.setText("Cargar usuario ");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,7 +197,7 @@ public class Convertidor extends javax.swing.JFrame {
 
         tipoImag.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "jpg", "bmp" }));
 
-        jButton2.setText("barra");
+        jButton2.setText("Clear");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -234,10 +237,10 @@ public class Convertidor extends javax.swing.JFrame {
                                 .addComponent(tipoImag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(imagenes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -346,6 +349,7 @@ public class Convertidor extends javax.swing.JFrame {
 
 //////////////////////////////////CAMBIAR TIPOS
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        cargaproceso.setValue(0);
         numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
         HilosFormato Hf[] = new HilosFormato[numeroimagenes];
         String nombreImagen;
@@ -356,7 +360,9 @@ public class Convertidor extends javax.swing.JFrame {
         } else if (secuencia == 1) {
             for (int i = 0; i < numeroimagenes; i++) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
+           
                 Hf[i] = new HilosFormato(nombreImagen, tipo);
+                Hf[i].setSize(numeroimagenes);
             }
 
             switch (numeroimagenes) {
@@ -463,8 +469,10 @@ public class Convertidor extends javax.swing.JFrame {
             for (int i = numeroimagenes; i > 0; i--) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i - 1).toString();
                 Hf[i - 1] = new HilosFormato(nombreImagen, tipo);
+                 Hf[i-1].setSize(numeroimagenes);
                 Hf[i - 1].run();
                 Hf[i - 1].start();
+                
             }
             /////////////////AGREGAR AL ARCHIVO SECUENCIA LIFO
             ///////////////imprimir fILE archivo en la consola  
@@ -473,6 +481,7 @@ public class Convertidor extends javax.swing.JFrame {
             for (int i = 0; i < numeroimagenes; i++) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
                 Hf[i] = new HilosFormato(nombreImagen, tipo);
+                 Hf[i].setSize(numeroimagenes);
                 Hf[i].run();
                 Hf[i].start();
             }
@@ -483,6 +492,7 @@ public class Convertidor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 //////////////////////COPIA JPG
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        cargaproceso.setValue(0);
         numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
         String nombreImagen;
         HilosCopia hc[] = new HilosCopia[numeroimagenes];
@@ -493,6 +503,7 @@ public class Convertidor extends javax.swing.JFrame {
             for (int i = 0; i < numeroimagenes; i++) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
                 hc[i] = new HilosCopia(nombreImagen);
+                hc[i].setSize(numeroimagenes);
             }
             switch (numeroimagenes) {
                 case 1:
@@ -594,6 +605,7 @@ public class Convertidor extends javax.swing.JFrame {
             for (int i = numeroimagenes; i > 0; i--) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i - 1).toString();
                 hc[i - 1] = new HilosCopia(nombreImagen);
+                hc[i-1].setSize(numeroimagenes);
                 hc[i - 1].run();
                 hc[i - 1].start();
             }
@@ -604,6 +616,7 @@ public class Convertidor extends javax.swing.JFrame {
             for (int i = 0; i < numeroimagenes; i++) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
                 hc[i] = new HilosCopia(nombreImagen);
+                hc[i].setSize(numeroimagenes);
                 hc[i].run();
                 hc[i].start();
             }
@@ -617,7 +630,7 @@ public class Convertidor extends javax.swing.JFrame {
         numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
         String nombreImagen;
         HilosColores hc[] = new HilosColores[numeroimagenes];
-        JpegImageHandlerColors Hi[] = new JpegImageHandlerColors[numeroimagenes];
+        JpegImageHandlerColors1 Hi[] = new JpegImageHandlerColors1[numeroimagenes];
         if (secuencia == 0) {
             JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
         } else if (secuencia == 1) {
@@ -723,14 +736,14 @@ public class Convertidor extends javax.swing.JFrame {
         } else if (secuencia == 3) {
             for (int i = 0; i < numeroimagenes; i++) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
-                Hi[i] = new JpegImageHandlerColors(nombreImagen);
+                Hi[i] = new JpegImageHandlerColors1(nombreImagen);
                 Hi[i].Todoslosmetodos();
             }
 
         } else if (secuencia == 2) {
             for (int i = numeroimagenes; i > 0; i--) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i - 1).toString();
-                Hi[i - 1] = new JpegImageHandlerColors(nombreImagen);
+                Hi[i - 1] = new JpegImageHandlerColors1(nombreImagen);
                 Hi[i - 1].Todoslosmetodos();
             }
         }
@@ -741,7 +754,7 @@ public class Convertidor extends javax.swing.JFrame {
         numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
         String nombreImagen;
         HilosRotator hc[] = new HilosRotator[numeroimagenes];
-        JpegImageHandlerRotator Hi[] = new JpegImageHandlerRotator[numeroimagenes];
+        JpegImageHandlerRotator1 Hi[] = new JpegImageHandlerRotator1[numeroimagenes];
         if (secuencia == 0) {
             JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
         } else if (secuencia == 1) {
@@ -847,14 +860,14 @@ public class Convertidor extends javax.swing.JFrame {
         } else if (secuencia == 3) {
             for (int i = 0; i < numeroimagenes; i++) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
-                Hi[i] = new JpegImageHandlerRotator(nombreImagen);
+                Hi[i] = new JpegImageHandlerRotator1(nombreImagen);
                 Hi[i].Todoslosmetodos();
             }
 
         } else if (secuencia == 2) {
             for (int i = numeroimagenes; i > 0; i--) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i - 1).toString();
-                Hi[i - 1] = new JpegImageHandlerRotator(nombreImagen);
+                Hi[i - 1] = new JpegImageHandlerRotator1(nombreImagen);
                 Hi[i - 1].Todoslosmetodos();
             }
         }
@@ -863,32 +876,42 @@ public class Convertidor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 /////////////////////BLANCO Y NEGRO
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-    numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
+         cargaproceso.removeAll();
+        cargaproceso.setValue(0);
+      
+        numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
         String nombreImagen;
         HilosBn hc[] = new HilosBn[numeroimagenes];
-        JpegImageHandlerBn Hi[] = new JpegImageHandlerBn[numeroimagenes];
+        JpegImageHandlerBn1 Hi[] = new JpegImageHandlerBn1[numeroimagenes];
         if (secuencia == 0) {
             JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
         } else if (secuencia == 1) {
             for (int i = 0; i < numeroimagenes; i++) {
+              
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
                 hc[i] = new HilosBn(nombreImagen);
                 hc[i].run();
                 hc[i].start();
+                
+                
+                
+               porcentaje=(int)(((i)/numeroimagenes)*100);
+                cargaproceso.setValue(porcentaje);
             }} else if (secuencia == 3) {
             for (int i = 0; i < numeroimagenes; i++) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
-                Hi[i] = new JpegImageHandlerBn(nombreImagen);
+                Hi[i] = new JpegImageHandlerBn1(nombreImagen);
                 Hi[i].Todoslosmetodos();
             }
 
         } else if (secuencia == 2) {
             for (int i = numeroimagenes; i > 0; i--) {
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i - 1).toString();
-                Hi[i - 1] = new JpegImageHandlerBn(nombreImagen);
+                Hi[i - 1] = new JpegImageHandlerBn1(nombreImagen);
                 Hi[i - 1].Todoslosmetodos();
             }
         }
+        cargaproceso.setValue(100);
     }//GEN-LAST:event_jButton7ActionPerformed
 //////////////////////EN PARARELO
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -966,10 +989,14 @@ public class Convertidor extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
       try{
-      
      
+     /*
+         cuando comienza sumarle 10
+          mientras hace el proceso para cada imagen sumarle 10
+          terminando el proceso, al final de la ventana sumar 100
+          */
       
-       cargaproceso.setValue(10);
+       cargaproceso.setValue(0);
       
   
       
