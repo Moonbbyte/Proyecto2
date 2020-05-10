@@ -78,8 +78,8 @@ public class JpegImageHandlerColors1 extends ImageHandler {
                 x = "green-";
             } else if (i == 3) {
                 x = "sepia-";
-                iteracion++;
-                porcentaje = (int) ((iteracion / getSize()) * 100);
+                setIteracion(getIteracion() + 1);
+                porcentaje = (int) ((getIteracion() / getSize()) * 100);
                 Convertidor.cargaproceso.setValue(porcentaje);
             }
             FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + x + this.handledFileName + ".bmp");
@@ -241,5 +241,19 @@ public class JpegImageHandlerColors1 extends ImageHandler {
      */
     public void setSize(int size) {
         this.size = size;
+    }
+
+    /**
+     * @return the iteracion
+     */
+    public static int getIteracion() {
+        return iteracion;
+    }
+
+    /**
+     * @param aIteracion the iteracion to set
+     */
+    public static void setIteracion(int aIteracion) {
+        iteracion = aIteracion;
     }
 }

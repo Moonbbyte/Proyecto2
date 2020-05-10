@@ -60,8 +60,8 @@ public class HilosFormato extends Thread {
        salida.write(filebytes);
        salida.close();
      }
-     iteracion++;
-     porcentaje=(int)((iteracion/size)*100);
+        setIteracion(getIteracion() + 1);
+     porcentaje=(int)((getIteracion()/size)*100);
      Convertidor.cargaproceso.setValue(porcentaje);
     //////////////// IMPRIMIRIA EL ARCHIVO SI NO FUERA TAN COMPLICADO PASSAR LOS DATOS
     }
@@ -116,6 +116,20 @@ public class HilosFormato extends Thread {
      */
     public void setSize(int size) {
         this.size = size;
+    }
+
+    /**
+     * @return the iteracion
+     */
+    public static int getIteracion() {
+        return iteracion;
+    }
+
+    /**
+     * @param aIteracion the iteracion to set
+     */
+    public static void setIteracion(int aIteracion) {
+        iteracion = aIteracion;
     }
 
 }

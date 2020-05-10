@@ -67,8 +67,8 @@ public class JpegImageHandlerBn1 extends ImageHandler {
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\BN-" + this.handledFileName + ".jpg");
         salida.write(filebytes);
         salida.close();
-        iteracion++;
-        porcentaje = (int) ((iteracion / getSize()) * 100);
+        setIteracion(getIteracion() + 1);
+        porcentaje = (int) ((getIteracion() / getSize()) * 100);
         Convertidor.cargaproceso.setValue(porcentaje);
 
     }
@@ -116,5 +116,19 @@ public class JpegImageHandlerBn1 extends ImageHandler {
      */
     public void setSize(int size) {
         this.size = size;
+    }
+
+    /**
+     * @return the iteracion
+     */
+    public static int getIteracion() {
+        return iteracion;
+    }
+
+    /**
+     * @param aIteracion the iteracion to set
+     */
+    public static void setIteracion(int aIteracion) {
+        iteracion = aIteracion;
     }
 }

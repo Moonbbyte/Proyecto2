@@ -72,7 +72,7 @@ Convertidor con= new Convertidor();
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(50, 136, 147, 32);
+        jButton1.setBounds(50, 136, 170, 32);
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -90,7 +90,7 @@ Convertidor con= new Convertidor();
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(342, 98, 124, 32);
+        jButton2.setBounds(326, 98, 140, 32);
 
         jButton3.setText("Ingresar a Convertidor");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +99,7 @@ Convertidor con= new Convertidor();
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(484, 98, 157, 32);
+        jButton3.setBounds(484, 98, 170, 32);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImagNieve.jpg"))); // NOI18N
         jPanel1.add(jLabel4);

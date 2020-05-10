@@ -70,8 +70,8 @@ public class HilosCopia extends Thread {
         salida.write(filebytes);
         salida.close();
         System.out.println("Imagen generada: " + this.nombre);
-     iteracion++;
-     porcentaje=(int)((iteracion/size)*100);
+        setIteracion(getIteracion() + 1);
+     porcentaje=(int)((getIteracion()/size)*100);
      Convertidor.cargaproceso.setValue(porcentaje);
     }
 
@@ -87,6 +87,20 @@ public class HilosCopia extends Thread {
      */
     public void setSize(int size) {
         this.size = size;
+    }
+
+    /**
+     * @return the iteracion
+     */
+    public static int getIteracion() {
+        return iteracion;
+    }
+
+    /**
+     * @param aIteracion the iteracion to set
+     */
+    public static void setIteracion(int aIteracion) {
+        iteracion = aIteracion;
     }
 
 }

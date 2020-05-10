@@ -353,13 +353,20 @@ public class Convertidor extends javax.swing.JFrame {
         cargaproceso.setValue(0);
         numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
         HilosFormato Hf[] = new HilosFormato[numeroimagenes];
+       HilosFormato.setIteracion(0);
         String nombreImagen;
         String tipo = tipoImag.getSelectedItem().toString();
-
+        String tipo1 = "";
+        if (tipo.equals("jpg")) {
+            tipo1 = "bmp";
+        } else if (tipo.equals("bmp")) {
+            tipo1 = "jpg";
+        }
         if (secuencia == 0) {
             JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
         } else if (secuencia == 1) {
             for (int i = 0; i < numeroimagenes; i++) {
+
                 nombreImagen = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().get(i).toString();
 
                 Hf[i] = new HilosFormato(nombreImagen, tipo);
@@ -367,7 +374,7 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == 0) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a " + tipo1 + " exitoso");
                 if (i == numeroimagenes - 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -481,10 +488,11 @@ public class Convertidor extends javax.swing.JFrame {
                 Hf[i - 1].setSize(numeroimagenes);
                 Hf[i - 1].run();
                 Hf[i - 1].start();
+
                 if (i == numeroimagenes) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                 modelolista.addElement("Procesamiento de " + nombreImagen + " a " + tipo1 + " exitoso");
                 if (i == 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -503,7 +511,7 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == 0) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+               modelolista.addElement("Procesamiento de " + nombreImagen + " a " + tipo1 + " exitoso");
                 if (i == numeroimagenes - 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -520,6 +528,7 @@ public class Convertidor extends javax.swing.JFrame {
         numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
         String nombreImagen;
         HilosCopia hc[] = new HilosCopia[numeroimagenes];
+        HilosCopia.setIteracion(0);
 
         if (secuencia == 0) {
             JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
@@ -531,7 +540,7 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == 0) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de copia de " + nombreImagen + " exitoso");
                 if (i == numeroimagenes - 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -642,7 +651,7 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == numeroimagenes) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de copia de " + nombreImagen + " exitoso");
                 if (i == 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -660,7 +669,7 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == 0) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de copia de " + nombreImagen + " exitoso");
                 if (i == numeroimagenes - 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -677,6 +686,9 @@ public class Convertidor extends javax.swing.JFrame {
         String nombreImagen;
         HilosColores hc[] = new HilosColores[numeroimagenes];
         JpegImageHandlerColors1 Hi[] = new JpegImageHandlerColors1[numeroimagenes];
+        HilosColores.setIteracion(0);
+        JpegImageHandlerColors1.setIteracion(0);
+        
         if (secuencia == 0) {
             JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
         } else if (secuencia == 1) {
@@ -687,7 +699,10 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == 0) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a sepia exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a rojo exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a azul exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a verde exitoso");
                 if (i == numeroimagenes - 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -796,7 +811,10 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == 0) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a sepia exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a rojo exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a azul exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a verde exitoso");
                 if (i == numeroimagenes - 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -812,7 +830,10 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == numeroimagenes) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a sepia exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a rojo exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a azul exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a verde exitoso");
                 if (i == 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -827,6 +848,9 @@ public class Convertidor extends javax.swing.JFrame {
         String nombreImagen;
         HilosRotator hc[] = new HilosRotator[numeroimagenes];
         JpegImageHandlerRotator1 Hi[] = new JpegImageHandlerRotator1[numeroimagenes];
+        HilosRotator.setIteracion(0);
+        JpegImageHandlerRotator1.setIteracion(0);
+        
         if (secuencia == 0) {
             JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
         } else if (secuencia == 1) {
@@ -837,7 +861,8 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == 0) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a rotacion vertical exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a rotacion horizontal exitoso");
                 if (i == numeroimagenes - 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -946,7 +971,8 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == 0) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a rotacion vertical exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a rotacion horizontal exitoso");
                 if (i == numeroimagenes - 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -961,7 +987,8 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == numeroimagenes) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a rotacion vertical exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a rotacion horizontal exitoso");
                 if (i == 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -979,6 +1006,9 @@ public class Convertidor extends javax.swing.JFrame {
         String nombreImagen;
         HilosBn hc[] = new HilosBn[numeroimagenes];
         JpegImageHandlerBn1 Hi[] = new JpegImageHandlerBn1[numeroimagenes];
+        HilosBn.setIteracion(0);
+        JpegImageHandlerBn1.setIteracion(0);
+        
         if (secuencia == 0) {
             JOptionPane.showMessageDialog(null, "Escoja modo de procesamiento");
         } else if (secuencia == 1) {
@@ -992,7 +1022,7 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == 0) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a Blanco y Negro exitoso");
                 if (i == numeroimagenes - 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -1007,7 +1037,7 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == 0) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+               modelolista.addElement("Procesamiento de " + nombreImagen + " a Blanco y Negro exitoso");
                 if (i == numeroimagenes - 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }
@@ -1022,7 +1052,7 @@ public class Convertidor extends javax.swing.JFrame {
                 if (i == numeroimagenes) {
                     modelolista.addElement("Inicio de procesamiento");
                 }
-                modelolista.addElement("Procesamiento de " + nombreImagen + " exitoso");
+                modelolista.addElement("Procesamiento de " + nombreImagen + " a Blanco y Negro exitoso");
                 if (i == 1) {
                     modelolista.addElement("Fin de procesamiento");
                 }

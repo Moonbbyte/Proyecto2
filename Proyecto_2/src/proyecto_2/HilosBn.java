@@ -58,8 +58,8 @@ public class HilosBn extends Thread {
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\BN-" + this.nombre + ".jpg");
         salida.write(filebytes);
         salida.close();
-        iteracion++;
-        porcentaje = (int) ((iteracion / getSize()) * 100);
+        setIteracion(getIteracion() + 1);
+        porcentaje = (int) ((getIteracion() / getSize()) * 100);
         Convertidor.cargaproceso.setValue(porcentaje);
     }
 
@@ -106,6 +106,20 @@ public class HilosBn extends Thread {
      */
     public void setSize(int size) {
         this.size = size;
+    }
+
+    /**
+     * @return the iteracion
+     */
+    public static int getIteracion() {
+        return iteracion;
+    }
+
+    /**
+     * @param aIteracion the iteracion to set
+     */
+    public static void setIteracion(int aIteracion) {
+        iteracion = aIteracion;
     }
 
 }
