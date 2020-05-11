@@ -17,11 +17,17 @@ public class HilosBn extends Thread {
     private int porcentaje = 0;
     private int size;
     private static int iteracion = 0;
-
+/**
+ * Construnctor de la clase
+ * @param nombre establece a todo el programa el nombre de la imagen a editar
+ **/
     public HilosBn(String nombre) {
         this.nombre = nombre;
     }
-
+/**
+ * Metodo que permite iniciar los demas metodos a traves de hilos
+   **/
+    
     @Override
     public void run() {
         try {
@@ -35,6 +41,9 @@ public class HilosBn extends Thread {
 
     }
 
+    /**
+     * Introduce la imagen solicitada al array de bytes
+     **/
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.nombre + ".jpg");
         filebytes = new byte[input.available()];
@@ -42,14 +51,18 @@ public class HilosBn extends Thread {
         input.close();
         System.out.println("Imagen leida: " + this.nombre);
     }
-
+/**
+ * Crea una copia bmp de la imagen  introducida al array de archivos
+ **/
     public void generateFiles() throws Exception {
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         salida.write(filebytes);
         salida.close();
         System.out.println("Imagen generada: " + this.nombre);
     }
-
+/**
+ * Convierte la imagen ya editada a blano y negro de un formato bmp a un formato jpg
+ **/
     public void convertirjpg() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\BN-" + this.nombre + ".bmp");
         filebytes = new byte[input.available()];
@@ -62,7 +75,9 @@ public class HilosBn extends Thread {
         porcentaje = (int) ((getIteracion() / getSize()) * 100);
         Convertidor.cargaproceso.setValue(porcentaje);
     }
-
+/**
+ * Metodo que permite la edicion de imagenes a blanco y negro
+ **/
     public void BN() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         try {

@@ -22,12 +22,12 @@ public abstract class EstructuraDeDatos implements Serializable{
     
     /**
      * method that adds a new element
-     * @param e 
+     * @param e .
      */
    public abstract void add(Object e);
    /**
     * Method that gets the last or first item. Depends on the structure
-     * @return 
+     * @return String nombre
    */
    public abstract Object peek();
    
@@ -47,19 +47,19 @@ public abstract class EstructuraDeDatos implements Serializable{
    
    /**
     * Metodo que devuelve el objeto con el indice i
-    * @param i
-    * @return 
+    * @param i retorna un nodo
+    * @return String nombre
     */
    public abstract Object get(int i);
    /**
     * Retira el ultimo elemento o el primer elemento de la lista
-    * @return 
+    * @return String nombre
     */
    public abstract Object pop();
    
    /**
     * Elimina un elemento de la lista, con la condicional e
-    * @param e 
+    * @param e elimina el nodo enviado
     */
    public abstract void delete(Object e);
 }

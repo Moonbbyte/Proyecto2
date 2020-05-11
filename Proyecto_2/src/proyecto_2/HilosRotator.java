@@ -7,7 +7,8 @@ import java.io.FileOutputStream;
 import javax.imageio.ImageIO;
 
 public class HilosRotator extends Thread {
- File Originalimage;
+
+    File Originalimage;
     BufferedImage img = null;
     byte[] filebytes;
     FileOutputStream salida;
@@ -16,20 +17,39 @@ public class HilosRotator extends Thread {
     private int size;
     private static int iteracion = 0;
 
-
+    /**
+     * Constructor de la clase HilosRotator
+     *
+     * @param nombre nombre de la imagen a editar
+ *
+     */
     public HilosRotator(String nombre) {
         this.nombre = nombre;
     }
+
+    /**
+     * Metodo que permite la inicializacion de los metodos de edicion de imagen
+  *
+     */
     @Override
     public void run() {
-        try{
-        readFile();
-        generateFiles();
-        rotarvertical();
-        rotarhorizontal();
-        pasaraJpg();
-        }catch(Exception e){e.printStackTrace();}
+        try {
+            readFile();
+            generateFiles();
+            rotarvertical();
+            rotarhorizontal();
+            pasaraJpg();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    /**
+     * introduce la imagen solicitada a un array de bits
+     *
+    
+  *
+     */
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.nombre + ".jpg");
         filebytes = new byte[input.available()];
@@ -37,23 +57,32 @@ public class HilosRotator extends Thread {
         input.close();
         System.out.println("Imagen leida: " + this.nombre);
     }
-     public void generateFiles() throws Exception {
-        salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre+ ".bmp");
+
+    /**
+     * Genera una copia de la imagen introducida en el array de bits en formmato bmp
+     
+     */
+    public void generateFiles() throws Exception {
+        salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         salida.write(filebytes);
         salida.close();
         System.out.println("Imagen generada: " + this.nombre);
 
     }
-    
+
+    /**
+     *Pasa las imagenes editadas a un formato jpg
+   
+     */
     public void pasaraJpg() throws Exception {
-        String name="Hrotation-"+this.nombre;
+        String name = "Hrotation-" + this.nombre;
 
         for (int i = 0; i < 2; i++) {
             if (i == 0) {
                 name = "Vrotation-" + this.nombre;
             } else if (i == 1) {
                 name = "Hrotation-" + this.nombre;
-                 setIteracion(getIteracion() + 1);
+                setIteracion(getIteracion() + 1);
                 porcentaje = (int) ((getIteracion() / getSize()) * 100);
                 Convertidor.cargaproceso.setValue(porcentaje);
             }
@@ -63,7 +92,7 @@ public class HilosRotator extends Thread {
             input.close();
             System.out.println("Imagen leida: " + this.nombre);
 
-            salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + name+ ".jpg");
+            salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + name + ".jpg");
             salida.write(filebytes);
             salida.close();
             System.out.println("Imagen generada: " + this.nombre);
@@ -71,7 +100,10 @@ public class HilosRotator extends Thread {
         }
 
     }
-
+/**
+  * Metodo que hace rotar la imagen 180 sobre el eje vertical
+  
+  **/ 
     public void rotarvertical() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         try {
@@ -91,9 +123,12 @@ public class HilosRotator extends Thread {
         }
 
     }
-
+/**
+  * Metodo que permite rotar una imagen sobre el eje horizontal
+  
+  **/ 
     public void rotarhorizontal() {
-        this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre+ ".bmp");
+        this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         try {
             img = ImageIO.read(Originalimage);
             BufferedImage rot = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -140,5 +175,5 @@ public class HilosRotator extends Thread {
     public static void setIteracion(int aIteracion) {
         iteracion = aIteracion;
     }
-    
+
 }

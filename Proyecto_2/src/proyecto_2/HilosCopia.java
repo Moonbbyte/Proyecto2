@@ -20,7 +20,10 @@ public class HilosCopia extends Thread {
     private int porcentaje = 0;
     private int size;
     private static int iteracion = 0;
-
+/**
+ * Constructor de la clase 
+ * @param nombre establece el nombre de la imagen a editar
+ **/
     public HilosCopia(String name) {
         this.nombre = name;
     }

@@ -17,10 +17,17 @@ public class HilosColores extends Thread {
     private int porcentaje = 0;
     private int size;
     private static int iteracion = 0;
+   
+    /**
+     * Constructor de la clase
+     * @param nombre establece a toda la clase la imagen a editar
+     **/
     public HilosColores(String nombre) {
         this.nombre = nombre;
     }
-
+/**
+ * Metodo que permite iniciar los demas metodos a traves de hilos
+   **/
     @Override
     public void run() {
         try {
@@ -36,7 +43,9 @@ public class HilosColores extends Thread {
         }
 
     }
-
+  /**
+     * Introduce la imagen solicitada al array de bytes
+     **/
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.nombre + ".jpg");
         filebytes = new byte[input.available()];
@@ -45,7 +54,9 @@ public class HilosColores extends Thread {
         System.out.println("Imagen leida: " + this.nombre);
 
     }
-
+/**
+ * Crea una copia bmp de la imagen  introducida al array de archivos
+ **/
     public void generateFiles() throws Exception {
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         salida.write(filebytes);
@@ -53,7 +64,9 @@ public class HilosColores extends Thread {
         System.out.println("Imagen generada: " + this.nombre);
 
     }
-
+/**
+ * Convierte la imagen ya editada de un formato bmp a un formato jpg
+ **/
     public void pasarBmpajpg() throws Exception {
         String x = "";
 
@@ -81,7 +94,9 @@ public class HilosColores extends Thread {
 
         }
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color sepia
+ **/
     public void sepia() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         try {
@@ -125,7 +140,9 @@ public class HilosColores extends Thread {
         }
 
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color verde
+ **/
     public void green() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         try {
@@ -155,7 +172,9 @@ public class HilosColores extends Thread {
             System.out.println(e);
         }
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color rojo
+ **/
     public void red() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         try {
@@ -185,7 +204,9 @@ public class HilosColores extends Thread {
             System.out.println(e);
         }
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color azul
+ **/
     public void blue() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.nombre + ".bmp");
         try {
