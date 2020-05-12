@@ -24,7 +24,9 @@ public class Convertidor extends javax.swing.JFrame {
     static int secuencia = 0;
     int porcentaje;
     DefaultListModel modelolista;
-
+/**
+ * Constructor del Convertidor, permite la inicializacion del Jframe Convertidor y lo posiciona en el centro
+ **/
     public Convertidor() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -347,6 +349,9 @@ public class Convertidor extends javax.swing.JFrame {
         }
     }
 
+    /**
+ *Boton para  cambiar el formato de las imagenes
+ **/
 //////////////////////////////////CAMBIAR TIPOS
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         modelolista.removeAllElements();
@@ -522,6 +527,9 @@ public class Convertidor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 //////////////////////COPIA JPG
+    /**
+ * Boton para realizar una copia jpg de una imagen
+ **/
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         modelolista.removeAllElements();
         cargaproceso.setValue(0);
@@ -680,6 +688,9 @@ public class Convertidor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 //////////////////COLORESSEPIAROJOAZULVERDE
+    /**
+ * Boton para la edicion en rojo, verde, azul y sepia de una imagen.
+ **/
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         modelolista.removeAllElements();
         numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
@@ -842,6 +853,9 @@ public class Convertidor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton5ActionPerformed
 //////////////////////ROTATOR
+    /**
+ * Boton para rotar imagenes.
+ **/
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         modelolista.removeAllElements();
         numeroimagenes = lu.getNodo(numerousuario).getCategorias().getNodo(numerocategoria).getImagenes().getSize();
@@ -998,6 +1012,9 @@ public class Convertidor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton6ActionPerformed
 /////////////////////BLANCO Y NEGRO
+ /**
+ * Boton para pasar las imagenes a blanco y negro.
+ **/
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         modelolista.removeAllElements();
         cargaproceso.setValue(0);
@@ -1061,18 +1078,29 @@ public class Convertidor extends javax.swing.JFrame {
         cargaproceso.setValue(100);
     }//GEN-LAST:event_jButton7ActionPerformed
 //////////////////////EN PARARELO
+    /**
+     * Boton para ejecutar en paralelo
+     **/
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         secuencia = 1;
     }//GEN-LAST:event_jButton8ActionPerformed
 ////////////////////FIFO
+    /**
+     * Boton para ejecutar en formato FIFO
+     **/
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         secuencia = 3;
     }//GEN-LAST:event_jButton9ActionPerformed
 //////////////////////LIFO
+    /**
+     * Boton para ejecutar en formato LIFO
+     **/
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         secuencia = 2;
     }//GEN-LAST:event_jButton10ActionPerformed
-
+/**
+ * Boton para almacenar todos los usuarios, categorias e imagenes de la biblioteca.
+ **/
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int indexusuario, indexcategoria, indeximagenes;
 
@@ -1103,7 +1131,9 @@ public class Convertidor extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+/**
+ * Carga los usuarios creados en la biblioteca.
+ **/
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         usuarios.removeAllItems();
 
@@ -1112,7 +1142,9 @@ public class Convertidor extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton11ActionPerformed
-
+/**
+ * Carga las bibliotecas creadas por los usuarios en la biblioteca.
+ **/
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         categorias.removeAllItems();
         String usuario = usuarios.getSelectedItem().toString();
@@ -1123,6 +1155,10 @@ public class Convertidor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 /////////////////cargar al convertidor
+    
+    /**
+     * Carga las imagenes presentes en las bibliotecas creadas por los usuarios.
+     **/
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         imagenes.removeAllItems();
         String usuario = usuarios.getSelectedItem().toString();
@@ -1133,7 +1169,9 @@ public class Convertidor extends javax.swing.JFrame {
             imagenes.addItem(lu.getNodo(indexusuario).getCategorias().getNodo(indexcategoria).getImagenes().get(i).toString());
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
-
+/**
+ * Boton para resetear la barra de carga
+ **/
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
 
@@ -1148,27 +1186,41 @@ public class Convertidor extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
+/**
+ * Obtiene la categoria del usuario indicado.
+ **/
     public static Object getCategoria() {
         return categoria;
     }
-
+/**
+ * Establece una categoria de un usuario indicado
+ **/
     public static void setCategoria(Object aCategoria) {
         categoria = aCategoria;
     }
-
+/**
+ * Obtiene el nombre de una imagen de una categoria escogida
+ **/
     public static Object getNombreImag() {
         return nombreImag;
     }
-
+/**
+ * Establece el nombre deuna imagen de una categoria escogida.
+ **/
     public static void setNombreImag(Object aNombreImag) {
         nombreImag = aNombreImag;
     }
-
+/**
+ * Obtiene el nombre de un usuario escogido.
+ * @return Object nombre retorna el nombre de  un usuario escogido.
+ **/
     public static Object getNombre() {
         return nombre;
     }
-
+/**
+ * Establece el nombre de un usuario escogido.
+ * @param aNombre establece el nombre de un usuario
+ **/
     public static void setNombre(Object aNombre) {
         nombre = aNombre;
     }

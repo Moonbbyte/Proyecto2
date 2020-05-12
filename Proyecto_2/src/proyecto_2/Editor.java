@@ -186,6 +186,9 @@ public class Editor extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+/**
+ *Boton para  cambiar el formato de las imagenes
+ **/
 ////////////////////////CONVERTIR IMAGEN
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.str = archivo.getName();
@@ -206,6 +209,9 @@ public class Editor extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+/**
+ * Boton para realizar una copia jpg de una imagen
+ **/
 /////////////////////////////COPIAR IMAGEN JPG
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.str = archivo.getName();
@@ -231,6 +237,9 @@ public class Editor extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+/**
+ * Boton para la edicion en rojo, verde, azul y sepia de una imagen.
+ **/
 /////////////////////////ROJO, VERDE, AZUL Y SEPIA
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
        
@@ -251,6 +260,9 @@ public class Editor extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton4ActionPerformed
+/**
+ * Boton para pasar las imagenes a blanco y negro.
+ **/
 /////////////////BLANCO Y NEGRO
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
       this.str=archivo.getName();
@@ -265,7 +277,9 @@ public class Editor extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
-
+/**
+ * Boton para rotar imagenes.
+ **/
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         this.str=archivo.getName();
         try{
