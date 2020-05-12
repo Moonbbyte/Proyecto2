@@ -26,10 +26,18 @@ public class JpegImageHandlerBn1 extends ImageHandler {
     private int size;
     private static int iteracion = 0;
 
+    /**
+ * Constructor de la clase
+ * @param filename establece a todo el programa el nombre de la imagen a editar
+ **/
+    
     public JpegImageHandlerBn1(String filename) {
         super(filename);
     }
-
+/**
+ * Metodo que permite iniciar los demas metodos
+   **/
+    
     public void Todoslosmetodos() {
         try {
             readFile();
@@ -41,7 +49,9 @@ public class JpegImageHandlerBn1 extends ImageHandler {
         }
 
     }
-
+/**
+     * Introduce la imagen jpg solicitada al array de bytes
+     **/
     @Override
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.handledFileName + ".jpg");
@@ -50,7 +60,9 @@ public class JpegImageHandlerBn1 extends ImageHandler {
         input.close();
         System.out.println("Imagen leida: " + this.handledFileName);
     }
-
+/**
+ * Crea una copia bmp de la imagen  introducida al array de archivos
+ **/
     @Override
     public void generateFiles() throws Exception {
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
@@ -58,7 +70,9 @@ public class JpegImageHandlerBn1 extends ImageHandler {
         salida.close();
         System.out.println("Imagen generada: " + this.handledFileName);
     }
-
+/**
+ * Convierte la imagen ya editada a blanco y negro de un formato bmp a un formato jpg
+ **/
     public void convertirjpg() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\BN-" + this.handledFileName + ".bmp");
         filebytes = new byte[input.available()];
@@ -72,7 +86,9 @@ public class JpegImageHandlerBn1 extends ImageHandler {
         Convertidor.cargaproceso.setValue(porcentaje);
 
     }
-
+/**
+ * Metodo que permite la edicion de imagenes a blanco y negro
+ **/
     public void BN() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {
@@ -105,6 +121,7 @@ public class JpegImageHandlerBn1 extends ImageHandler {
     }
 
     /**
+     * Permite obtener la cantidad de imagenes almacenadas
      * @return the size
      */
     public int getSize() {
@@ -112,6 +129,7 @@ public class JpegImageHandlerBn1 extends ImageHandler {
     }
 
     /**
+     * Establece la cantidad de imagenes almacenadas en una categoria
      * @param size the size to set
      */
     public void setSize(int size) {
@@ -119,6 +137,7 @@ public class JpegImageHandlerBn1 extends ImageHandler {
     }
 
     /**
+     * Obtiene el numero de veces que se edita, depende del numero de imagenes almacenadas
      * @return the iteracion
      */
     public static int getIteracion() {
@@ -126,6 +145,7 @@ public class JpegImageHandlerBn1 extends ImageHandler {
     }
 
     /**
+     *  Establece el numero de veces que se edito
      * @param aIteracion the iteracion to set
      */
     public static void setIteracion(int aIteracion) {

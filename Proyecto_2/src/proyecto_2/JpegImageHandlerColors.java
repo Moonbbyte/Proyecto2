@@ -14,11 +14,17 @@ public class JpegImageHandlerColors extends ImageHandler {
     BufferedImage img = null;
     byte[] filebytes;
     FileOutputStream salida;
-
+/**
+     * Constructor de la clase
+     * @param filename establece a toda la clase la imagen a editar
+     **/
     public JpegImageHandlerColors(String filename) {
         super(filename);
     }
-/////////////////////////////////////////////LEER UNA IMAGENA A JPG
+
+    /**
+ * Metodo que permite iniciar los demas metodos a traves de hilos
+   **/
     public void Todoslosmetodos(){
     try {
             readFile();
@@ -33,6 +39,9 @@ public class JpegImageHandlerColors extends ImageHandler {
         }
     
     }
+    /**
+     * Introduce la imagen solicitada al array de bytes
+     **/
     @Override
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.handledFileName + ".jpg");
@@ -43,7 +52,9 @@ public class JpegImageHandlerColors extends ImageHandler {
 
     }
 //////////////////////CREAR UN ARCHIVO BMP
-
+/**
+ * Crea una copia bmp de la imagen  introducida al array de archivos
+ **/
     @Override
     public void generateFiles() throws Exception {
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
@@ -52,7 +63,9 @@ public class JpegImageHandlerColors extends ImageHandler {
         System.out.println("Imagen generada: " + this.handledFileName);
 
     }
-
+/**
+ * Convierte la imagen ya editada de un formato bmp a un formato jpg
+ **/
     public void pasarBmpajpg() throws Exception {
         String x = "";
 
@@ -78,7 +91,9 @@ public class JpegImageHandlerColors extends ImageHandler {
         }
 
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color sepia
+ **/
     public void sepia() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {
@@ -122,7 +137,9 @@ public class JpegImageHandlerColors extends ImageHandler {
         }
 
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color verde
+ **/
     public void green() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {
@@ -152,7 +169,9 @@ public class JpegImageHandlerColors extends ImageHandler {
             System.out.println(e);
         }
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color rojo
+ **/
     public void red() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {
@@ -182,7 +201,9 @@ public class JpegImageHandlerColors extends ImageHandler {
             System.out.println(e);
         }
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color azul
+ **/
     public void blue() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {

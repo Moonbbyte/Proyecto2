@@ -13,13 +13,19 @@ public class HilosFormato extends Thread {
     FileInputStream entrada;
     FileOutputStream salida;
 
-/////////////////contructor
+/**
+ * Constructor de la clase
+ * @param nombre establece a todo el programa el nombre de la imagen a editar
+ * @param tipo establece el tipo de imagen introducida
+ * 
+ **/
     public HilosFormato(String nombre, String tipo) {
         this.nombre = nombre;
         this.tipo = tipo;
     }
-
-////////////////METODO RUN//////////////// 
+/**
+ * Metodo que permite iniciar los demas metodos a traves de hilos
+   **/
     @Override
     public void run() {
     try{
@@ -27,8 +33,9 @@ public class HilosFormato extends Thread {
     generateFiles();
     }catch(Exception e){}          
     }
-//////////////////////////////OBTENER IMAGENES
-
+/**
+     * Introduce la imagen  solicitada al array de bytes en el formato solicitado
+     **/
     public void readFile() throws Exception {
         if (getTipo().equals("jpg")) {
 
@@ -46,10 +53,12 @@ public class HilosFormato extends Thread {
             System.out.println("Imagen leida: " + getNombre());
 
         }
-////////////////////////////GRABAR ARCHIVO
+
     }
 
-///////////////////////////////////CREAR IMAGENES
+/**
+ * Crea una copia en el formato solicitado de la imagen  introducida al array de archivos
+ **/
     public void generateFiles() throws Exception{
      if(getTipo().equals("bmp")){
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\Converted-" +getNombre()+ ".jpg");
@@ -63,7 +72,7 @@ public class HilosFormato extends Thread {
         setIteracion(getIteracion() + 1);
      porcentaje=(int)((getIteracion()/size)*100);
      Convertidor.cargaproceso.setValue(porcentaje);
-    //////////////// IMPRIMIRIA EL ARCHIVO SI NO FUERA TAN COMPLICADO PASSAR LOS DATOS
+    
     }
     
     
@@ -73,6 +82,7 @@ public class HilosFormato extends Thread {
     
     
     /**
+     * Permite obtener el nombre de la imagen que se esta editando
      * @return the nombre
      */
     public String getNombre() {
@@ -80,6 +90,8 @@ public class HilosFormato extends Thread {
     }
 
     /**
+     * 
+     * Establece el nombre de la imagen a editar
      * @param aNombre the nombre to set
      */
     public  void setNombre(String aNombre) {
@@ -87,6 +99,7 @@ public class HilosFormato extends Thread {
     }
 
     /**
+     * Permite obtener el tipo de la imagen que se esta editando
      * @return the tipo
      */
     public  String getTipo() {
@@ -94,6 +107,7 @@ public class HilosFormato extends Thread {
     }
 
     /**
+     * Establece el tipo de la imagen a editar
      * @param aTipo the tipo to set
      */
     public  void setTipo(String aTipo) {
@@ -105,6 +119,7 @@ public class HilosFormato extends Thread {
      */
  
     /**
+     * Permite obtener la cantidad de imagenes almacenadas
      * @return the size
      */
     public int getSize() {
@@ -112,6 +127,7 @@ public class HilosFormato extends Thread {
     }
 
     /**
+     *  Establece la cantidad de imagenes almacenadas en una categoria
      * @param size the size to set
      */
     public void setSize(int size) {

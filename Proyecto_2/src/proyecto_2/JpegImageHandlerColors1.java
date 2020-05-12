@@ -26,11 +26,20 @@ public class JpegImageHandlerColors1 extends ImageHandler {
     private int size;
     private static int iteracion = 0;
 
+    /**
+     * Constructor de la clase
+     *
+     * @param filename establece a toda la clase la imagen a editar
+     *
+     */
     public JpegImageHandlerColors1(String filename) {
         super(filename);
     }
-/////////////////////////////////////////////LEER UNA IMAGENA A JPG
 
+    /**
+     * Metodo que permite iniciar los demas metodos 
+   *
+     */
     public void Todoslosmetodos() {
         try {
             readFile();
@@ -46,6 +55,10 @@ public class JpegImageHandlerColors1 extends ImageHandler {
 
     }
 
+    /**
+     * Introduce la imagen solicitada al array de bytes
+     *
+     */
     @Override
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.handledFileName + ".jpg");
@@ -56,7 +69,9 @@ public class JpegImageHandlerColors1 extends ImageHandler {
 
     }
 //////////////////////CREAR UN ARCHIVO BMP
-
+/**
+ * Crea una copia bmp de la imagen  introducida al array de archivos
+ **/
     @Override
     public void generateFiles() throws Exception {
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
@@ -65,7 +80,9 @@ public class JpegImageHandlerColors1 extends ImageHandler {
         System.out.println("Imagen generada: " + this.handledFileName);
 
     }
-
+/**
+ * Convierte la imagen ya editada de un formato bmp a un formato jpg
+ **/
     public void pasarBmpajpg() throws Exception {
         String x = "";
 
@@ -94,7 +111,9 @@ public class JpegImageHandlerColors1 extends ImageHandler {
         }
 
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color sepia
+ **/
     public void sepia() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {
@@ -138,7 +157,9 @@ public class JpegImageHandlerColors1 extends ImageHandler {
         }
 
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color verde
+ **/
     public void green() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {
@@ -168,7 +189,9 @@ public class JpegImageHandlerColors1 extends ImageHandler {
             System.out.println(e);
         }
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color rojo
+ **/
     public void red() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {
@@ -198,7 +221,9 @@ public class JpegImageHandlerColors1 extends ImageHandler {
             System.out.println(e);
         }
     }
-
+/**
+ * Metodo que genera una copia de la imagen solicitada a un color azul
+ **/
     public void blue() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {
@@ -230,6 +255,7 @@ public class JpegImageHandlerColors1 extends ImageHandler {
     }
 
     /**
+     * Permite obtener la cantidad de imagenes almacenadas
      * @return the size
      */
     public int getSize() {
@@ -237,6 +263,7 @@ public class JpegImageHandlerColors1 extends ImageHandler {
     }
 
     /**
+     *  Establece la cantidad de imagenes almacenadas en una categoria
      * @param size the size to set
      */
     public void setSize(int size) {
@@ -244,6 +271,7 @@ public class JpegImageHandlerColors1 extends ImageHandler {
     }
 
     /**
+     * Obtiene el numero de veces que se edita, depende del numero de imagenes almacenadas
      * @return the iteracion
      */
     public static int getIteracion() {
@@ -251,6 +279,7 @@ public class JpegImageHandlerColors1 extends ImageHandler {
     }
 
     /**
+     * Establece el numero de veces que se edito
      * @param aIteracion the iteracion to set
      */
     public static void setIteracion(int aIteracion) {

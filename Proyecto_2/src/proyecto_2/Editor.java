@@ -18,7 +18,9 @@ public class Editor extends javax.swing.JFrame {
     static byte[] bytesimag;
     JpgToBmpImage Jtb = new JpgToBmpImage("x");
     BmptoJpegImage Btj = new BmptoJpegImage("x");
-
+/**
+ * Constructor del Editor, permite la inicializacion del Jframe Editor y lo posiciona en el centro
+ **/
     public Editor() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -148,7 +150,9 @@ public class Editor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-////////////////AGREGAR IMAGEN
+/**
+ * Boton con el cual se puede agregar imagenes al editor
+ **/
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JpgToBmpImage cargar = new JpgToBmpImage("x");
 

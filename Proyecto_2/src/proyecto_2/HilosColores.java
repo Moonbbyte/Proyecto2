@@ -238,6 +238,7 @@ public class HilosColores extends Thread {
     }
 
     /**
+     * Permite obtener la cantidad de imagenes almacenadas
      * @return the size
      */
     public int getSize() {
@@ -245,6 +246,7 @@ public class HilosColores extends Thread {
     }
 
     /**
+     * Establece la cantidad de imagenes almacenadas en una categoria
      * @param size the size to set
      */
     public void setSize(int size) {
@@ -252,6 +254,7 @@ public class HilosColores extends Thread {
     }
 
     /**
+     * Retorna elnumero de veces que se edito.
      * @return the iteracion
      */
     public static int getIteracion() {
@@ -259,6 +262,7 @@ public class HilosColores extends Thread {
     }
 
     /**
+     * Establece el numero de veces que se edito
      * @param aIteracion the iteracion to set
      */
     public static void setIteracion(int aIteracion) {

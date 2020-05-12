@@ -12,12 +12,17 @@ public class JpgToBmpImage extends ImageHandler {
     FileOutputStream salida;
    byte[] img;
     private File archivo;
-
+/**
+ * Constructor de la clase
+ * @param filename establece a todo el programa el nombre de la imagen a editar
+ **/
     public JpgToBmpImage(String filename) {
         super(filename);
         
     }
-
+  /**
+     * Introduce la imagen jpg solicitada al array de bytes
+     **/
     @Override
     public void readFile() throws Exception {
         img = new byte[1024 * 768];
@@ -29,7 +34,10 @@ public class JpgToBmpImage extends ImageHandler {
         }
 
     }
-    
+    /**
+     * Retorna la imagen al metodo readFile()
+     * @return byte[] img1 retorna un array de bytes
+     **/
     public byte[] AgregarImagen(File archivo){
     byte[]  img1 = new byte[1024 * 768];
      try {
@@ -43,7 +51,9 @@ public class JpgToBmpImage extends ImageHandler {
     }
     
     
-
+/**
+ * Crea una copia bmp de la imagen  introducida al array de archivos
+ **/
     @Override
     public void generateFiles() throws Exception {
                         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\converted-"+getNombre()+".bmp");

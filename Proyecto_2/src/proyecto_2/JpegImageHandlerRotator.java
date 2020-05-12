@@ -12,11 +12,18 @@ public class JpegImageHandlerRotator extends ImageHandler {
     BufferedImage img = null;
     byte[] filebytes;
     FileOutputStream salida;
-
+/**
+     * Constructor de la clase HilosRotator
+     *
+     * @param filename nombre de la imagen a editar
+     */
     public JpegImageHandlerRotator(String filename) {
         super(filename);
     }
-    
+  /**
+     * Metodo que permite la inicializacion de los metodos de edicion de imagen.
+  *
+     */   
     public void Todoslosmetodos(){
      try{
         readFile();
@@ -27,7 +34,12 @@ public class JpegImageHandlerRotator extends ImageHandler {
         
         }catch(Exception e){e.printStackTrace();}
     }
-
+  /**
+     * introduce la imagen solicitada a un array de bytes
+     *
+    
+  *
+     */
     @Override
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.handledFileName + ".jpg");
@@ -36,7 +48,10 @@ public class JpegImageHandlerRotator extends ImageHandler {
         input.close();
         System.out.println("Imagen leida: " + this.handledFileName);
     }
-
+ /**
+     * Genera una copia de la imagen introducida en el array de bits en formmato bmp
+     
+     */
     @Override
     public void generateFiles() throws Exception {
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
@@ -45,7 +60,10 @@ public class JpegImageHandlerRotator extends ImageHandler {
         System.out.println("Imagen generada: " + this.handledFileName);
 
     }
-
+/**
+     *Pasa las imagenes editadas a un formato jpg
+   
+     */
     public void pasaraJpg() throws Exception {
         String name="Hrotation-"+this.handledFileName;
 
@@ -69,7 +87,10 @@ public class JpegImageHandlerRotator extends ImageHandler {
         }
 
     }
-
+/**
+  * Metodo que hace rotar la imagen 180 sobre el eje vertical
+  
+  **/ 
     public void rotarvertical() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {
@@ -89,7 +110,10 @@ public class JpegImageHandlerRotator extends ImageHandler {
         }
 
     }
-
+/**
+  * Metodo que permite rotar una imagen sobre el eje horizontal
+  
+  **/ 
     public void rotarhorizontal() {
         this.Originalimage = new File("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\" + this.handledFileName + ".bmp");
         try {

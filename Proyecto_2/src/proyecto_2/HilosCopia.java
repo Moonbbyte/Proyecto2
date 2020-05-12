@@ -22,12 +22,14 @@ public class HilosCopia extends Thread {
     private static int iteracion = 0;
 /**
  * Constructor de la clase 
- * @param nombre establece el nombre de la imagen a editar
+ * @param name establece el nombre de la imagen a editar
  **/
     public HilosCopia(String name) {
         this.nombre = name;
     }
-
+/**
+ *Metodo que permite iniciar los demas metodos a traves de hilos
+ **/
     @Override
     public void run() {
         try {
@@ -38,9 +40,11 @@ public class HilosCopia extends Thread {
         } catch (Exception e) {
         }
 
-        ///////////////OBTENER JPG 
+         
     }
-
+/**
+     * Introduce la imagen jpg solicitada al array de bytes
+     **/
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.nombre + ".jpg");
         filebytes = new byte[input.available()];
@@ -50,7 +54,9 @@ public class HilosCopia extends Thread {
 
     }
 
-    ////////GENERAR A BMP
+  /**
+ * Crea una copia bmp de la imagen  introducida al array de archivos
+ **/
     public void generateFiles() throws Exception {
         salida = new FileOutputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\copia-" + this.nombre + ".bmp");
         salida.write(filebytes);
@@ -62,7 +68,10 @@ public class HilosCopia extends Thread {
                 fichero.delete();*/
     }
 
-    ////////CONVERTIR IMAGEN GENERADA EN JPG
+    
+    /**
+ * Convierte la imagen copia generada en formato bmp a jpg
+ **/
     public void convertiraJpg() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\copia-" + this.nombre + ".bmp");
         filebytes = new byte[input.available()];
@@ -79,6 +88,7 @@ public class HilosCopia extends Thread {
     }
 
     /**
+     * Permite obtener la cantidad de imagenes almacenadas
      * @return the size
      */
     public int getSize() {
@@ -86,6 +96,7 @@ public class HilosCopia extends Thread {
     }
 
     /**
+     * Establece la cantidad de imagenes almacenadas en una categoria
      * @param size the size to set
      */
     public void setSize(int size) {

@@ -18,7 +18,7 @@ public class HilosBn extends Thread {
     private int size;
     private static int iteracion = 0;
 /**
- * Construnctor de la clase
+ * Constructor de la clase
  * @param nombre establece a todo el programa el nombre de la imagen a editar
  **/
     public HilosBn(String nombre) {
@@ -42,7 +42,7 @@ public class HilosBn extends Thread {
     }
 
     /**
-     * Introduce la imagen solicitada al array de bytes
+     * Introduce la imagen jpg solicitada al array de bytes
      **/
     public void readFile() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenes\\" + this.nombre + ".jpg");
@@ -61,7 +61,7 @@ public class HilosBn extends Thread {
         System.out.println("Imagen generada: " + this.nombre);
     }
 /**
- * Convierte la imagen ya editada a blano y negro de un formato bmp a un formato jpg
+ * Convierte la imagen ya editada a blanco y negro de un formato bmp a un formato jpg
  **/
     public void convertirjpg() throws Exception {
         FileInputStream input = new FileInputStream("C:\\Users\\Brandon\\Documents\\NetBeansProjects\\Proyecto2\\Imagenesconvertidas\\BN-" + this.nombre + ".bmp");
@@ -110,6 +110,7 @@ public class HilosBn extends Thread {
     }
 
     /**
+     * Permite obtener la cantidad de imagenes almacenadas
      * @return the size
      */
     public int getSize() {
@@ -117,6 +118,7 @@ public class HilosBn extends Thread {
     }
 
     /**
+     * Establece la cantidad de imagenes almacenadas en una categoria
      * @param size the size to set
      */
     public void setSize(int size) {
@@ -124,6 +126,7 @@ public class HilosBn extends Thread {
     }
 
     /**
+     * Obtiene el numero de veces que se edita, depende del numero de imagenes almacenadas
      * @return the iteracion
      */
     public static int getIteracion() {
@@ -131,6 +134,7 @@ public class HilosBn extends Thread {
     }
 
     /**
+     * Establece el numero de veces que se edito
      * @param aIteracion the iteracion to set
      */
     public static void setIteracion(int aIteracion) {
